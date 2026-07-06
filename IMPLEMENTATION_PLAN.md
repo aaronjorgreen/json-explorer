@@ -19,7 +19,7 @@
 | 0 | Repo & tooling setup | `[x]` Done |
 | 1 | Foundation & brand shell | `[x]` Done |
 | 2 | Input & validation | `[x]` Done |
-| 3 | Tree builder & explorer | `[ ]` Not started |
+| 3 | Tree builder & explorer | `[x]` Done |
 | 4 | Search & highlight | `[ ]` Not started |
 | 5 | Copy, persistence & polish | `[ ]` Not started |
 | 6 | Large file performance | `[ ]` Not started |
@@ -274,38 +274,38 @@ colors: {
 
 #### `lib/buildTree.ts`
 
-- [ ] Implement `buildTree(data: unknown): { nodes: JsonNode[]; stats: TreeStats }`
-- [ ] Handle root object, root array, and root primitive
-- [ ] Compute stats: objects, arrays, properties (total keys), max depth, node count
-- [ ] Write unit tests for nested structures, empty `{}`/`[]`, stat accuracy
+- [x] Implement `buildTree(data: unknown): { nodes: JsonNode[]; stats: TreeStats }`
+- [x] Handle root object, root array, and root primitive
+- [x] Compute stats: objects, arrays, properties (total keys), max depth, node count
+- [x] Write unit tests for nested structures, empty `{}`/`[]`, stat accuracy
 
 #### `lib/format.ts`
 
-- [ ] `formatValue(value): string` — type-aware preview (truncate long strings)
-- [ ] `getValueType(value): string` — `"string"`, `"number"`, `"boolean"`, `"null"`
-- [ ] `stringifyPretty(data): string` — `JSON.stringify(data, null, 2)`
+- [x] `formatValue(value): string` — type-aware preview (truncate long strings)
+- [x] `getValueType(value): string` — `"string"`, `"number"`, `"boolean"`, `"null"`
+- [x] `stringifyPretty(data): string` — `JSON.stringify(data, null, 2)`
 
 #### Components
 
-- [ ] `StatsBar.tsx` — displays objects, arrays, properties, depth, node count
-- [ ] `TreeToolbar.tsx` — Expand All / Collapse All buttons
-- [ ] `JsonTree.tsx` — renders root node list
-- [ ] `JsonTreeNode.tsx` — recursive; chevron, key, value, type badge, child count
-- [ ] Expand state: levels 0–1 open by default; session-only (`useState` / `useReducer`)
-- [ ] Expand All / Collapse All wired through tree context or callback props
-- [ ] Empty explorer state when no valid JSON ("Paste JSON to explore")
+- [x] `StatsBar.tsx` — displays objects, arrays, properties, depth, node count
+- [x] `TreeToolbar.tsx` — Expand All / Collapse All buttons
+- [x] `JsonTree.tsx` — renders root node list
+- [x] `JsonTreeNode.tsx` — recursive; chevron, key, value, type badge, child count
+- [x] Expand state: levels 0–1 open by default; session-only (`useState` / `useReducer`)
+- [x] Expand All / Collapse All wired through tree context or callback props
+- [x] Empty explorer state when no valid JSON ("Paste JSON to explore")
 
 #### Integration
 
-- [ ] Extend `useJsonDocument` — on successful parse, call `buildTree`, expose `nodes` + `stats`
-- [ ] Wire `ExplorerPanel` → `StatsBar` + `TreeToolbar` + `JsonTree`
+- [x] Extend `useJsonDocument` — on successful parse, call `buildTree`, expose `nodes` + `stats`
+- [x] Wire `ExplorerPanel` → `StatsBar` + `TreeToolbar` + `JsonTree`
 
 ### Exit Criteria
 
-- [ ] Valid JSON renders as collapsible tree
-- [ ] Stats match manual count on test payloads
-- [ ] Expand/collapse works to depth 5+ without errors
-- [ ] `buildTree` unit tests pass
+- [x] Valid JSON renders as collapsible tree
+- [x] Stats match manual count on test payloads
+- [x] Expand/collapse works to depth 5+ without errors
+- [x] `buildTree` unit tests pass
 
 ---
 

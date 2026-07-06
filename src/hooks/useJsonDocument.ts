@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDebouncedValue } from '@/hooks/useDebouncedValue'
+import { buildTree } from '@/lib/buildTree'
 import { parseJson, type ParseResult } from '@/lib/parseJson'
+import type { JsonNode, TreeStats } from '@/types/json'
 
 const LARGE_INPUT_THRESHOLD = 100 * 1024
 const SOFT_WARN_BYTES = 5 * 1024 * 1024
@@ -18,6 +20,8 @@ export interface UseJsonDocumentResult {
   isParsing: boolean
   fileMeta: FileMeta | null
   fileWarning: string | null
+  nodes: JsonNode[]
+  stats: TreeStats | null
   parseNow: () => void
   loadFromFile: (file: File) => Promise<void>
   clearInput: () => void
@@ -103,6 +107,14 @@ export function useJsonDocument(): UseJsonDocumentResult {
     setIsParsing(false)
   }, [])
 
+  const treeData = useMemo(() => {
+    if (!parseResult?.ok) {
+      return { nodes: [] as JsonNode[], stats: null as TreeStats | null }
+    }
+    const { nodes, stats } = buildTree(parseResult.data)
+    return { nodes, stats }
+  }, [parseResult])
+
   return useMemo(
     () => ({
       rawInput,
@@ -111,6 +123,8 @@ export function useJsonDocument(): UseJsonDocumentResult {
       isParsing,
       fileMeta,
       fileWarning,
+      nodes: treeData.nodes,
+      stats: treeData.stats,
       parseNow,
       loadFromFile,
       clearInput,
@@ -122,6 +136,7 @@ export function useJsonDocument(): UseJsonDocumentResult {
       isParsing,
       fileMeta,
       fileWarning,
+      treeData,
       parseNow,
       loadFromFile,
       clearInput,
