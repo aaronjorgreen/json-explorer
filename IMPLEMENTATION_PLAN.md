@@ -22,7 +22,7 @@
 | 3 | Tree builder & explorer | `[x]` Done |
 | 4 | Search & highlight | `[x]` Done |
 | 5 | Copy, persistence & polish | `[x]` Done |
-| 6 | Large file performance | `[ ]` Not started |
+| 6 | Large file performance | `[x]` Done |
 | 7 | Responsive & mobile UX | `[ ]` Not started |
 | 8 | Deploy to Vercel | `[ ]` Not started |
 
@@ -387,20 +387,20 @@ colors: {
 
 ### Checklist
 
-- [ ] Install `@tanstack/react-virtual`
-- [ ] Flatten visible tree nodes to a list (respecting expand state) for virtualization
-- [ ] Switch to virtualized list when `stats.nodeCount > 500`
-- [ ] Show parse time (ms) in stats bar after parse
-- [ ] Show warning badge when `nodeCount > 10_000`
-- [ ] "Jump to top" FAB in explorer when scrolled > 400px
-- [ ] Verify 1MB sample JSON: parse completes, tree scrolls smoothly, search still works
-- [ ] Profile: no full-tree re-render on single node expand (React DevTools spot check)
+- [x] Install `@tanstack/react-virtual`
+- [x] Flatten visible tree nodes to a list (respecting expand state) for virtualization
+- [x] Switch to virtualized list when `stats.nodeCount > 500`
+- [x] Show parse time (ms) in stats bar after parse
+- [x] Show warning badge when `nodeCount > 10_000`
+- [x] "Jump to top" FAB in explorer when scrolled > 400px
+- [x] Verify 1MB sample JSON: parse completes, tree scrolls smoothly, search still works
+- [x] Profile: no full-tree re-render on single node expand (React DevTools spot check)
 
 ### Exit Criteria
 
-- [ ] 1MB+ JSON usable without browser freeze > 3s
-- [ ] Virtualization activates automatically above threshold
-- [ ] Size/time indicators visible in UI
+- [x] 1MB+ JSON usable without browser freeze > 3s
+- [x] Virtualization activates automatically above threshold
+- [x] Size/time indicators visible in UI
 
 ---
 

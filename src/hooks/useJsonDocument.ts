@@ -23,6 +23,7 @@ export interface UseJsonDocumentResult {
   fileWarning: string | null
   nodes: JsonNode[]
   stats: TreeStats | null
+  parseTimeMs: number | null
   didRestoreSession: boolean
   parseNow: () => void
   loadFromFile: (file: File) => Promise<void>
@@ -39,11 +40,13 @@ export function useJsonDocument(): UseJsonDocumentResult {
   const [isParsing, setIsParsing] = useState(false)
   const [fileMeta, setFileMeta] = useState<FileMeta | null>(null)
   const [fileWarning, setFileWarning] = useState<string | null>(null)
+  const [parseTimeMs, setParseTimeMs] = useState<number | null>(null)
   const debouncedInput = useDebouncedValue(rawInput, 300)
 
   const runParse = useCallback((input: string) => {
     if (input.trim().length === 0) {
       setParseResult(null)
+      setParseTimeMs(null)
       setIsParsing(false)
       return
     }
@@ -53,7 +56,9 @@ export function useJsonDocument(): UseJsonDocumentResult {
     }
 
     window.requestAnimationFrame(() => {
+      const start = performance.now()
       const result = parseJson(input)
+      setParseTimeMs(performance.now() - start)
       setParseResult(result)
       setIsParsing(false)
     })
@@ -117,6 +122,7 @@ export function useJsonDocument(): UseJsonDocumentResult {
     setFileMeta(null)
     setFileWarning(null)
     setIsParsing(false)
+    setParseTimeMs(null)
     clearStoredJson()
   }, [])
 
@@ -138,6 +144,7 @@ export function useJsonDocument(): UseJsonDocumentResult {
       fileWarning,
       nodes: treeData.nodes,
       stats: treeData.stats,
+      parseTimeMs,
       didRestoreSession,
       parseNow,
       loadFromFile,
@@ -151,6 +158,7 @@ export function useJsonDocument(): UseJsonDocumentResult {
       fileMeta,
       fileWarning,
       treeData,
+      parseTimeMs,
       didRestoreSession,
       parseNow,
       loadFromFile,

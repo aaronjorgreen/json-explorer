@@ -1,10 +1,14 @@
 import type { TreeStats } from '@/types/json'
+import { Badge } from '@/components/ui/Badge'
 
 interface StatsBarProps {
   stats: TreeStats | null
+  parseTimeMs: number | null
 }
 
-export function StatsBar({ stats }: StatsBarProps) {
+const LARGE_TREE_WARNING = 10_000
+
+export function StatsBar({ stats, parseTimeMs }: StatsBarProps) {
   if (!stats) return null
 
   const items = [
@@ -23,6 +27,17 @@ export function StatsBar({ stats }: StatsBarProps) {
           <span className="text-text-primary">{item.value.toLocaleString()}</span>
         </span>
       ))}
+      {parseTimeMs !== null ? (
+        <span>
+          <span className="text-text-muted">Parse: </span>
+          <span className="text-text-primary">{parseTimeMs.toFixed(0)}ms</span>
+        </span>
+      ) : null}
+      {stats.nodeCount > LARGE_TREE_WARNING ? (
+        <Badge variant="accent" className="border-yellow-500/40 bg-yellow-500/10 text-yellow-100">
+          Large tree
+        </Badge>
+      ) : null}
     </div>
   )
 }
