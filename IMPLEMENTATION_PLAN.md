@@ -18,7 +18,7 @@
 |-------|------|--------|
 | 0 | Repo & tooling setup | `[x]` Done |
 | 1 | Foundation & brand shell | `[x]` Done |
-| 2 | Input & validation | `[ ]` Not started |
+| 2 | Input & validation | `[~]` In progress |
 | 3 | Tree builder & explorer | `[ ]` Not started |
 | 4 | Search & highlight | `[ ]` Not started |
 | 5 | Copy, persistence & polish | `[ ]` Not started |
@@ -230,10 +230,10 @@ colors: {
 
 #### `lib/parseJson.ts`
 
-- [ ] Implement `parseJson(input: string): ParseResult`
-- [ ] Return `{ ok: true, data: unknown }` or `{ ok: false, error: ParseError }`
-- [ ] Extract line, column, character index from `SyntaxError` + position offset
-- [ ] Write unit tests covering: valid JSON, trailing comma, unclosed bracket, position accuracy
+- [x] Implement `parseJson(input: string): ParseResult`
+- [x] Return `{ ok: true, data: unknown }` or `{ ok: false, error: ParseError }`
+- [x] Extract line, column, character index from `SyntaxError` + position offset
+- [x] Write unit tests covering: valid JSON, trailing comma, unclosed bracket, position accuracy
 
 #### `hooks/useJsonDocument.ts`
 
