@@ -23,7 +23,7 @@
 | 4 | Search & highlight | `[x]` Done |
 | 5 | Copy, persistence & polish | `[x]` Done |
 | 6 | Large file performance | `[x]` Done |
-| 7 | Responsive & mobile UX | `[ ]` Not started |
+| 7 | Responsive & mobile UX | `[x]` Done |
 | 8 | Deploy to Vercel | `[ ]` Not started |
 
 **Legend:** `[ ]` Not started · `[~]` In progress · `[x]` Done
@@ -410,26 +410,26 @@ colors: {
 
 ### Checklist
 
-- [ ] `HamburgerMenu.tsx` — upload, expand/collapse all, clear, about
-- [ ] Mobile input drawer/sheet — opens from menu or tab; closes on successful parse
-- [ ] Collapse header actions into hamburger below `lg` breakpoint
-- [ ] Sticky search bar + stats bar on mobile explorer scroll
-- [ ] Touch targets ≥ 44px on chevrons, buttons, menu items
-- [ ] Long string values: `break-all` / truncate with expand-on-click (optional)
-- [ ] Test full flow on 375px viewport:
-  - [ ] Paste JSON via drawer
-  - [ ] View tree
-  - [ ] Search + navigate matches
-  - [ ] Copy JSON
-  - [ ] Refresh → restore
-- [ ] Test tablet (768px) accordion/stack layout
-- [ ] Fix any horizontal overflow or z-index issues
+- [x] `HamburgerMenu.tsx` — upload, expand/collapse all, clear, about
+- [x] Mobile input drawer/sheet — opens from menu or tab; closes on successful parse
+- [x] Collapse header actions into hamburger below `lg` breakpoint
+- [x] Sticky search bar + stats bar on mobile explorer scroll
+- [x] Touch targets ≥ 44px on chevrons, buttons, menu items
+- [x] Long string values: `break-all` / truncate with expand-on-click (optional)
+- [x] Test full flow on 375px viewport:
+  - [x] Paste JSON via drawer
+  - [x] View tree
+  - [x] Search + navigate matches
+  - [x] Copy JSON
+  - [x] Refresh → restore
+- [x] Test tablet (768px) accordion/stack layout
+- [x] Fix any horizontal overflow or z-index issues
 
 ### Exit Criteria
 
-- [ ] All MVP features work on mobile and desktop
-- [ ] No horizontal scroll on any breakpoint
-- [ ] Hamburger menu accessible and keyboard-operable
+- [x] All MVP features work on mobile and desktop
+- [x] No horizontal scroll on any breakpoint
+- [x] Hamburger menu accessible and keyboard-operable
 
 ---
 

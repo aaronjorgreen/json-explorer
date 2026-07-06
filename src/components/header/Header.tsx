@@ -7,7 +7,11 @@ import { useSearch } from '@/hooks/useSearch'
 import { useToast } from '@/hooks/useToast'
 import { stringifyPretty } from '@/lib/format'
 
-export function Header() {
+interface HeaderProps {
+  onOpenMenu: () => void
+}
+
+export function Header({ onOpenMenu }: HeaderProps) {
   const { parseResult } = useJsonDocumentContext()
   const { showToast } = useToast()
   const hasTree = parseResult?.ok === true
@@ -105,7 +109,12 @@ export function Header() {
           <span className="hidden xl:inline">Copy</span>
         </Button>
 
-        <Button variant="ghost" className="px-3 lg:hidden" aria-label="Open menu">
+        <Button
+          variant="ghost"
+          className="min-h-11 min-w-11 px-3 lg:hidden"
+          aria-label="Open menu"
+          onClick={onOpenMenu}
+        >
           <Menu className="h-5 w-5" aria-hidden="true" />
         </Button>
       </div>
