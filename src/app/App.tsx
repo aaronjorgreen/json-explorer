@@ -1,6 +1,7 @@
 import { JsonDocumentProvider, useJsonDocumentContext } from '@/hooks/JsonDocumentContext'
 import { SearchProvider, useSearch } from '@/hooks/useSearch'
 import { ToastProvider } from '@/hooks/useToast'
+import { TreeActionsProvider } from '@/hooks/useTreeActions'
 import { MainLayout } from '@/app/MainLayout'
 import { SessionRestoreNotice } from '@/components/input/SessionRestoreNotice'
 import { ToastContainer } from '@/components/ui/Toast'
@@ -36,7 +37,9 @@ function App() {
   return (
     <ToastProvider>
       <JsonDocumentProvider>
-        <SearchableLayout />
+        <TreeActionsProvider>
+          <SearchableLayout />
+        </TreeActionsProvider>
       </JsonDocumentProvider>
     </ToastProvider>
   )

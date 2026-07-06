@@ -1,8 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { GripVertical } from 'lucide-react'
+import { GripVertical, PenLine } from 'lucide-react'
 import { Header } from '@/components/header/Header'
+import { HamburgerMenu } from '@/components/header/HamburgerMenu'
 import { InputPanel } from '@/components/input/InputPanel'
+import { MobileInputDrawer } from '@/components/input/MobileInputDrawer'
 import { ExplorerPanel } from '@/components/explorer/ExplorerPanel'
+import { Button } from '@/components/ui/Button'
+import { useJsonDocumentContext } from '@/hooks/JsonDocumentContext'
 
 const MIN_PANEL_PERCENT = 25
 const MAX_PANEL_PERCENT = 60
@@ -13,9 +17,13 @@ interface MainLayoutProps {
 }
 
 export function MainLayout({ onClearAll }: MainLayoutProps) {
+  const { loadFromFile } = useJsonDocumentContext()
   const containerRef = useRef<HTMLDivElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const [inputPercent, setInputPercent] = useState(DEFAULT_INPUT_PERCENT)
   const [isDragging, setIsDragging] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [inputDrawerOpen, setInputDrawerOpen] = useState(false)
 
   const handlePointerMove = useCallback(
     (event: PointerEvent) => {
@@ -47,15 +55,40 @@ export function MainLayout({ onClearAll }: MainLayoutProps) {
 
   return (
     <div className="flex min-h-screen flex-col bg-base">
-      <Header />
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".json,application/json"
+        className="hidden"
+        onChange={(event) => {
+          const file = event.target.files?.item(0)
+          if (file) {
+            void loadFromFile(file)
+          }
+          event.target.value = ''
+        }}
+      />
+
+      <Header onOpenMenu={() => setMenuOpen(true)} />
 
       <main className="flex min-h-0 flex-1 flex-col p-4 lg:p-6">
+        <div className="mb-3 flex lg:hidden">
+          <Button
+            variant="secondary"
+            className="w-full"
+            onClick={() => setInputDrawerOpen(true)}
+          >
+            <PenLine className="h-4 w-4" aria-hidden="true" />
+            Edit JSON
+          </Button>
+        </div>
+
         <div
           ref={containerRef}
           className="flex min-h-0 flex-1 flex-col gap-4 lg:flex-row lg:gap-0"
         >
           <div
-            className="min-h-[240px] min-w-0 shrink-0 lg:min-h-0"
+            className="hidden min-h-[240px] min-w-0 shrink-0 lg:block lg:min-h-0"
             style={{ flexBasis: `${inputPercent}%` }}
           >
             <InputPanel onClearAll={onClearAll} />
@@ -82,6 +115,20 @@ export function MainLayout({ onClearAll }: MainLayoutProps) {
           </div>
         </div>
       </main>
+
+      <HamburgerMenu
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        onOpenInput={() => setInputDrawerOpen(true)}
+        onUpload={() => fileInputRef.current?.click()}
+        onClearAll={() => onClearAll?.()}
+      />
+
+      <MobileInputDrawer
+        open={inputDrawerOpen}
+        onClose={() => setInputDrawerOpen(false)}
+        onClearAll={onClearAll}
+      />
     </div>
   )
 }
