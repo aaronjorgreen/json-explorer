@@ -8,7 +8,11 @@ const MIN_PANEL_PERCENT = 25
 const MAX_PANEL_PERCENT = 60
 const DEFAULT_INPUT_PERCENT = 40
 
-export function MainLayout() {
+interface MainLayoutProps {
+  onClearAll?: () => void
+}
+
+export function MainLayout({ onClearAll }: MainLayoutProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [inputPercent, setInputPercent] = useState(DEFAULT_INPUT_PERCENT)
   const [isDragging, setIsDragging] = useState(false)
@@ -54,7 +58,7 @@ export function MainLayout() {
             className="min-h-[240px] min-w-0 shrink-0 lg:min-h-0"
             style={{ flexBasis: `${inputPercent}%` }}
           >
-            <InputPanel />
+            <InputPanel onClearAll={onClearAll} />
           </div>
 
           <div

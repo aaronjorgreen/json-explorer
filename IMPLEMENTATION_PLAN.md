@@ -21,7 +21,7 @@
 | 2 | Input & validation | `[x]` Done |
 | 3 | Tree builder & explorer | `[x]` Done |
 | 4 | Search & highlight | `[x]` Done |
-| 5 | Copy, persistence & polish | `[ ]` Not started |
+| 5 | Copy, persistence & polish | `[x]` Done |
 | 6 | Large file performance | `[ ]` Not started |
 | 7 | Responsive & mobile UX | `[ ]` Not started |
 | 8 | Deploy to Vercel | `[ ]` Not started |
@@ -356,28 +356,28 @@ colors: {
 
 #### `lib/storage.ts`
 
-- [ ] `saveJson(raw: string): void` — key: `structra:last-json`
-- [ ] `loadJson(): string | null` — try/catch for private mode / quota
-- [ ] Write unit test with mocked `localStorage`
+- [x] `saveJson(raw: string): void` — key: `structra:last-json`
+- [x] `loadJson(): string | null` — try/catch for private mode / quota
+- [x] Write unit test with mocked `localStorage`
 
 #### Features
 
-- [ ] Copy button in header — `navigator.clipboard.writeText(stringifyPretty(data))`
-- [ ] Copy disabled when parse invalid or empty
-- [ ] Toast component — "Copied to clipboard" / error fallback
-- [ ] On mount: load from localStorage → populate textarea → auto-parse
-- [ ] One-time toast: "Restored from last session"
-- [ ] Save to localStorage on every successful parse
-- [ ] `Cmd/Ctrl+Enter` keyboard shortcut to parse
-- [ ] Empty states: input placeholder, explorer placeholder, search disabled when no tree
-- [ ] Clear input action (menu) — resets textarea, tree, stats, search
+- [x] Copy button in header — `navigator.clipboard.writeText(stringifyPretty(data))`
+- [x] Copy disabled when parse invalid or empty
+- [x] Toast component — "Copied to clipboard" / error fallback
+- [x] On mount: load from localStorage → populate textarea → auto-parse
+- [x] One-time toast: "Restored from last session"
+- [x] Save to localStorage on every successful parse
+- [x] `Cmd/Ctrl+Enter` keyboard shortcut to parse
+- [x] Empty states: input placeholder, explorer placeholder, search disabled when no tree
+- [x] Clear input action (menu) — resets textarea, tree, stats, search
 
 ### Exit Criteria
 
-- [ ] Copy produces valid pretty-printed JSON
-- [ ] JSON persists and restores across page refresh
-- [ ] Edge states (empty, invalid, restored) handled gracefully
-- [ ] No console errors in happy path or common error paths
+- [x] Copy produces valid pretty-printed JSON
+- [x] JSON persists and restores across page refresh
+- [x] Edge states (empty, invalid, restored) handled gracefully
+- [x] No console errors in happy path or common error paths
 
 ---
 

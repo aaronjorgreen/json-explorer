@@ -13,6 +13,7 @@ interface SearchContextValue {
   nextMatch: () => void
   prevMatch: () => void
   expandPaths: Set<string>
+  clearSearch: () => void
   isSearchActive: boolean
 }
 
@@ -49,6 +50,11 @@ export function SearchProvider({
     setCurrentIndex((prev) => (prev - 1 + matches.length) % matches.length)
   }, [matches.length])
 
+  const clearSearch = useCallback(() => {
+    setQuery('')
+    setCurrentIndex(0)
+  }, [])
+
   const value = useMemo(
     () => ({
       query,
@@ -59,6 +65,7 @@ export function SearchProvider({
       currentMatch,
       nextMatch,
       prevMatch,
+      clearSearch,
       expandPaths,
       isSearchActive,
     }),
@@ -70,6 +77,7 @@ export function SearchProvider({
       currentMatch,
       nextMatch,
       prevMatch,
+      clearSearch,
       expandPaths,
       isSearchActive,
     ],
