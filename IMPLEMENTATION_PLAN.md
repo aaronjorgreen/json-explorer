@@ -24,7 +24,7 @@
 | 5 | Copy, persistence & polish | `[x]` Done |
 | 6 | Large file performance | `[x]` Done |
 | 7 | Responsive & mobile UX | `[x]` Done |
-| 8 | Deploy to Vercel | `[~]` In progress |
+| 8 | Deploy to Vercel | `[x]` Done *(code complete; Vercel connect pending user)* |
 
 **Legend:** `[ ]` Not started · `[~]` In progress · `[x]` Done
 
@@ -466,8 +466,8 @@ Run once after Phase 7, repeat after any major change.
 
 ### Input & Parse
 
-- [ ] Paste valid JSON → tree appears
-- [ ] Paste invalid JSON → error with line/col/char; tree unchanged
+- [x] Paste valid JSON → tree appears
+- [x] Paste invalid JSON → error with line/col/char; tree unchanged
 - [ ] Upload `.json` file → content loads and parses
 - [ ] Drag-drop file → content loads and parses
 - [ ] 6MB file → soft warning shown
@@ -478,13 +478,13 @@ Run once after Phase 7, repeat after any major change.
 
 - [ ] Expand/collapse individual nodes
 - [ ] Expand All / Collapse All work
-- [ ] Stats accurate on nested sample
-- [ ] Empty `{}` and `[]` show type badges
+- [x] Stats accurate on nested sample
+- [x] Empty `{}` and `[]` show type badges
 
 ### Search
 
 - [ ] Search key → highlighted
-- [ ] Search value → highlighted
+- [x] Search value → highlighted
 - [ ] Case-insensitive match works
 - [ ] Prev/Next navigates all matches
 - [ ] Clear search → highlights removed
@@ -521,11 +521,11 @@ Keep these in `src/lib/__fixtures__/` for tests and manual QA.
 
 MVP is complete when **all** of the following are true:
 
-- [ ] All Phase 0–8 exit criteria checked
-- [ ] Manual QA checklist fully passed
-- [ ] `lib/` unit tests pass (`npm run test`)
-- [ ] `npm run build` succeeds with zero errors
-- [ ] No known P0 bugs (crash, data loss, parse silently fails)
+- [~] All Phase 0–8 exit criteria checked *(Vercel live URL pending user connect)*
+- [~] Manual QA checklist fully passed *(core parse/tree/search cases verified in testing/browser-qa.md)*
+- [x] `lib/` unit tests pass (`npm run test`)
+- [x] `npm run build` succeeds with zero errors
+- [x] No known P0 bugs (crash, data loss, parse silently fails)
 - [ ] Deployed to Vercel with README live URL
 - [ ] MVP_ONE success criteria (8 items) verified
 
