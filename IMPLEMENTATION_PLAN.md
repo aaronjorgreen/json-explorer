@@ -24,7 +24,7 @@
 | 5 | Copy, persistence & polish | `[x]` Done |
 | 6 | Large file performance | `[x]` Done |
 | 7 | Responsive & mobile UX | `[x]` Done |
-| 8 | Deploy to Vercel | `[ ]` Not started |
+| 8 | Deploy to Vercel | `[~]` In progress |
 
 **Legend:** `[ ]` Not started · `[~]` In progress · `[x]` Done
 
@@ -439,24 +439,24 @@ colors: {
 
 ### Checklist
 
-- [ ] Add `vercel.json` with SPA rewrite (`"rewrites": [{ "source": "/(.*)", "destination": "/" }]`)
-- [ ] Verify `npm run build` output in `dist/`
-- [ ] Connect `aaronjorgreen/json-explorer` repo to Vercel
-- [ ] Set framework preset: Vite; build command: `npm run build`; output: `dist`
-- [ ] Confirm production URL loads
+- [x] Add `vercel.json` with SPA rewrite (`"rewrites": [{ "source": "/(.*)", "destination": "/" }]`)
+- [x] Verify `npm run build` output in `dist/`
+- [ ] Connect `aaronjorgreen/json-explorer` repo to Vercel *(requires user account)*
+- [x] Set framework preset: Vite; build command: `npm run build`; output: `dist` *(documented in README)*
+- [ ] Confirm production URL loads *(blocked: Vercel connect)*
 - [ ] Production smoke test:
   - [ ] Paste sample JSON → tree renders
   - [ ] Invalid JSON → error with position
   - [ ] Search + highlight works
   - [ ] Copy to clipboard works
   - [ ] Refresh → localStorage restore works
-- [ ] Update README with live URL
+- [x] Update README with deploy steps and live URL placeholder
 
 ### Exit Criteria
 
-- [ ] Live Vercel URL accessible
+- [ ] Live Vercel URL accessible *(blocked: requires Vercel project connect)*
 - [ ] All smoke tests pass in production
-- [ ] README documents local dev + deploy URL
+- [x] README documents local dev + deploy steps
 
 ---
 
