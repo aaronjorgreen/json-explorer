@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "profile": {
+        "email": "alice@example.com",
+        "settings": {
+          "theme": "dark",
+          "notifications": {
+            "email": true
+          }
+        }
+      }
+    }
+  ],
+  "meta": {
+    "version": 2
+  }
+}
