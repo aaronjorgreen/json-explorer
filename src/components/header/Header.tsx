@@ -4,10 +4,14 @@ import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { useJsonDocumentContext } from '@/hooks/JsonDocumentContext'
 import { useSearch } from '@/hooks/useSearch'
+import { useToast } from '@/hooks/useToast'
+import { stringifyPretty } from '@/lib/format'
 
 export function Header() {
   const { parseResult } = useJsonDocumentContext()
+  const { showToast } = useToast()
   const hasTree = parseResult?.ok === true
+  const canCopy = hasTree && parseResult?.ok === true
   const {
     query,
     setQuery,
@@ -24,6 +28,16 @@ export function Header() {
         ? 'No matches'
         : null
       : `${currentIndex + 1} of ${matches.length}`
+
+  const handleCopy = async () => {
+    if (!parseResult?.ok) return
+    try {
+      await navigator.clipboard.writeText(stringifyPretty(parseResult.data))
+      showToast('Copied to clipboard', 'success')
+    } catch {
+      showToast('Failed to copy to clipboard', 'error')
+    }
+  }
 
   return (
     <header className="flex shrink-0 items-center gap-3 border-b border-border bg-surface px-4 py-3 lg:px-6">
@@ -80,7 +94,13 @@ export function Header() {
           </Button>
         </div>
 
-        <Button variant="ghost" className="hidden px-3 lg:inline-flex" disabled aria-label="Copy JSON">
+        <Button
+          variant="ghost"
+          className="hidden px-3 lg:inline-flex"
+          disabled={!canCopy}
+          aria-label="Copy JSON"
+          onClick={() => void handleCopy()}
+        >
           <Copy className="h-4 w-4" aria-hidden="true" />
           <span className="hidden xl:inline">Copy</span>
         </Button>

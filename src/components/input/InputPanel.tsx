@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { FileJson, Loader2, Upload } from 'lucide-react'
+import { FileJson, Loader2, Trash2, Upload } from 'lucide-react'
 import { DropZone } from '@/components/input/DropZone'
 import { JsonTextarea } from '@/components/input/JsonTextarea'
 import { ParseErrorBanner } from '@/components/input/ParseErrorBanner'
@@ -13,7 +13,7 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
 }
 
-export function InputPanel() {
+export function InputPanel({ onClearAll }: { onClearAll?: () => void }) {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const {
     rawInput,
@@ -67,6 +67,18 @@ export function InputPanel() {
           <Button variant="primary" className="px-3" onClick={parseNow}>
             Parse
           </Button>
+          {onClearAll ? (
+            <Button
+              variant="ghost"
+              className="px-3"
+              aria-label="Clear input"
+              onClick={onClearAll}
+              disabled={rawInput.length === 0}
+            >
+              <Trash2 className="h-4 w-4" aria-hidden="true" />
+              <span className="hidden sm:inline">Clear</span>
+            </Button>
+          ) : null}
         </div>
       </div>
 

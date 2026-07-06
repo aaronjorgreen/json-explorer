@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDebouncedValue } from '@/hooks/useDebouncedValue'
 import { buildTree } from '@/lib/buildTree'
 import { parseJson, type ParseResult } from '@/lib/parseJson'
+import { clearStoredJson, loadJson, saveJson } from '@/lib/storage'
 import type { JsonNode, TreeStats } from '@/types/json'
 
 const LARGE_INPUT_THRESHOLD = 100 * 1024
@@ -22,13 +23,18 @@ export interface UseJsonDocumentResult {
   fileWarning: string | null
   nodes: JsonNode[]
   stats: TreeStats | null
+  didRestoreSession: boolean
   parseNow: () => void
   loadFromFile: (file: File) => Promise<void>
   clearInput: () => void
 }
 
 export function useJsonDocument(): UseJsonDocumentResult {
-  const [rawInput, setRawInputState] = useState('')
+  const [rawInput, setRawInputState] = useState(() => loadJson() ?? '')
+  const [didRestoreSession] = useState(() => {
+    const saved = loadJson()
+    return Boolean(saved?.trim())
+  })
   const [parseResult, setParseResult] = useState<ParseResult | null>(null)
   const [isParsing, setIsParsing] = useState(false)
   const [fileMeta, setFileMeta] = useState<FileMeta | null>(null)
@@ -60,6 +66,12 @@ export function useJsonDocument(): UseJsonDocumentResult {
   useEffect(() => {
     runParse(debouncedInput)
   }, [debouncedInput, runParse])
+
+  useEffect(() => {
+    if (parseResult?.ok) {
+      saveJson(rawInput)
+    }
+  }, [parseResult, rawInput])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -105,6 +117,7 @@ export function useJsonDocument(): UseJsonDocumentResult {
     setFileMeta(null)
     setFileWarning(null)
     setIsParsing(false)
+    clearStoredJson()
   }, [])
 
   const treeData = useMemo(() => {
@@ -125,6 +138,7 @@ export function useJsonDocument(): UseJsonDocumentResult {
       fileWarning,
       nodes: treeData.nodes,
       stats: treeData.stats,
+      didRestoreSession,
       parseNow,
       loadFromFile,
       clearInput,
@@ -137,6 +151,7 @@ export function useJsonDocument(): UseJsonDocumentResult {
       fileMeta,
       fileWarning,
       treeData,
+      didRestoreSession,
       parseNow,
       loadFromFile,
       clearInput,
