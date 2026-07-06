@@ -1,17 +1,23 @@
+import { useRef } from 'react'
 import { TreePine } from 'lucide-react'
+import { JumpToTopFab } from '@/components/explorer/JumpToTopFab'
 import { JsonTree } from '@/components/explorer/JsonTree'
 import { SearchScrollEffect } from '@/components/explorer/SearchScrollEffect'
 import { StatsBar } from '@/components/explorer/StatsBar'
 import { TreeToolbar } from '@/components/explorer/TreeToolbar'
+import { VirtualizedJsonTree } from '@/components/explorer/VirtualizedJsonTree'
 import { Badge } from '@/components/ui/Badge'
 import { useJsonDocumentContext } from '@/hooks/JsonDocumentContext'
 import { useSearch } from '@/hooks/useSearch'
 import { TreeExpandProvider } from '@/hooks/useTreeExpand'
+import { VIRTUALIZATION_THRESHOLD } from '@/lib/flattenTree'
 
 export function ExplorerPanel() {
-  const { parseResult, nodes, stats } = useJsonDocumentContext()
+  const { parseResult, nodes, stats, parseTimeMs } = useJsonDocumentContext()
   const { expandPaths } = useSearch()
+  const scrollRef = useRef<HTMLDivElement>(null)
   const hasTree = parseResult?.ok === true && nodes.length > 0
+  const useVirtualization = (stats?.nodeCount ?? 0) > VIRTUALIZATION_THRESHOLD
 
   return (
     <section
@@ -29,10 +35,15 @@ export function ExplorerPanel() {
       {hasTree ? (
         <TreeExpandProvider nodes={nodes} forceExpandPaths={expandPaths}>
           <SearchScrollEffect />
-          <StatsBar stats={stats} />
+          <StatsBar stats={stats} parseTimeMs={parseTimeMs} />
           <TreeToolbar />
-          <div className="min-h-0 flex-1 overflow-auto p-2">
-            <JsonTree nodes={nodes} />
+          <div ref={scrollRef} className="relative min-h-0 flex-1 overflow-auto p-2">
+            {useVirtualization ? (
+              <VirtualizedJsonTree nodes={nodes} scrollRef={scrollRef} />
+            ) : (
+              <JsonTree nodes={nodes} />
+            )}
+            <JumpToTopFab scrollContainerRef={scrollRef} />
           </div>
         </TreeExpandProvider>
       ) : (
