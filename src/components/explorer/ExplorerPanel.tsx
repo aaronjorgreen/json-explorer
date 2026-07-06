@@ -1,13 +1,16 @@
 import { TreePine } from 'lucide-react'
 import { JsonTree } from '@/components/explorer/JsonTree'
+import { SearchScrollEffect } from '@/components/explorer/SearchScrollEffect'
 import { StatsBar } from '@/components/explorer/StatsBar'
 import { TreeToolbar } from '@/components/explorer/TreeToolbar'
 import { Badge } from '@/components/ui/Badge'
 import { useJsonDocumentContext } from '@/hooks/JsonDocumentContext'
+import { useSearch } from '@/hooks/useSearch'
 import { TreeExpandProvider } from '@/hooks/useTreeExpand'
 
 export function ExplorerPanel() {
   const { parseResult, nodes, stats } = useJsonDocumentContext()
+  const { expandPaths } = useSearch()
   const hasTree = parseResult?.ok === true && nodes.length > 0
 
   return (
@@ -24,7 +27,8 @@ export function ExplorerPanel() {
       </div>
 
       {hasTree ? (
-        <TreeExpandProvider nodes={nodes}>
+        <TreeExpandProvider nodes={nodes} forceExpandPaths={expandPaths}>
+          <SearchScrollEffect />
           <StatsBar stats={stats} />
           <TreeToolbar />
           <div className="min-h-0 flex-1 overflow-auto p-2">

@@ -20,7 +20,7 @@
 | 1 | Foundation & brand shell | `[x]` Done |
 | 2 | Input & validation | `[x]` Done |
 | 3 | Tree builder & explorer | `[x]` Done |
-| 4 | Search & highlight | `[ ]` Not started |
+| 4 | Search & highlight | `[x]` Done |
 | 5 | Copy, persistence & polish | `[ ]` Not started |
 | 6 | Large file performance | `[ ]` Not started |
 | 7 | Responsive & mobile UX | `[ ]` Not started |
@@ -317,34 +317,34 @@ colors: {
 
 #### `lib/searchTree.ts`
 
-- [ ] Implement `searchTree(nodes, query): SearchMatch[]`
-- [ ] Match keys and stringified values; case-insensitive substring
-- [ ] Return stable path IDs for each match (e.g. `users[2].email`)
-- [ ] Write unit tests: key match, value match, partial match, no results
+- [x] Implement `searchTree(nodes, query): SearchMatch[]`
+- [x] Match keys and stringified values; case-insensitive substring
+- [x] Return stable path IDs for each match (e.g. `users[2].email`)
+- [x] Write unit tests: key match, value match, partial match, no results
 
 #### `hooks/useSearch.ts`
 
-- [ ] Debounced query state (150ms)
-- [ ] Current match index + total count
-- [ ] `nextMatch()` / `prevMatch()` — wrap around
-- [ ] Compute set of paths to auto-expand (all ancestor paths of matches)
+- [x] Debounced query state (150ms)
+- [x] Current match index + total count
+- [x] `nextMatch()` / `prevMatch()` — wrap around
+- [x] Compute set of paths to auto-expand (all ancestor paths of matches)
 
 #### UI
 
-- [ ] Wire search input in `Header.tsx`
-- [ ] Match count badge: `"3 of 12"` or `"No matches"`
-- [ ] Prev / Next buttons in header (disabled when no matches)
-- [ ] Highlight matching key/value text in `JsonTreeNode` (tech blue tint)
-- [ ] Highlight current match with stronger border/background
-- [ ] Auto-expand ancestor nodes when search active
-- [ ] `scrollIntoView` on current match node (`ref` registry or `data-path` query)
+- [x] Wire search input in `Header.tsx`
+- [x] Match count badge: `"3 of 12"` or `"No matches"`
+- [x] Prev / Next buttons in header (disabled when no matches)
+- [x] Highlight matching key/value text in `JsonTreeNode` (tech blue tint)
+- [x] Highlight current match with stronger border/background
+- [x] Auto-expand ancestor nodes when search active
+- [x] `scrollIntoView` on current match node (`ref` registry or `data-path` query)
 
 ### Exit Criteria
 
-- [ ] Search finds keys and values correctly
-- [ ] Highlights visible; prev/next navigates and scrolls to match
-- [ ] Clearing search removes highlights and restores default expand state
-- [ ] `searchTree` unit tests pass
+- [x] Search finds keys and values correctly
+- [x] Highlights visible; prev/next navigates and scrolls to match
+- [x] Clearing search removes highlights and restores default expand state
+- [x] `searchTree` unit tests pass
 
 ---
 

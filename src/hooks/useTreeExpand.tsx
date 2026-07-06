@@ -19,9 +19,11 @@ function getDefaultExpanded(nodes: JsonNode[]): Set<string> {
 
 export function TreeExpandProvider({
   nodes,
+  forceExpandPaths,
   children,
 }: {
   nodes: JsonNode[]
+  forceExpandPaths?: Set<string>
   children: ReactNode
 }) {
   const [expandedPaths, setExpandedPaths] = useState<Set<string>>(() => getDefaultExpanded(nodes))
@@ -30,7 +32,10 @@ export function TreeExpandProvider({
     setExpandedPaths(getDefaultExpanded(nodes))
   }, [nodes])
 
-  const isExpanded = useCallback((path: string) => expandedPaths.has(path), [expandedPaths])
+  const isExpanded = useCallback(
+    (path: string) => expandedPaths.has(path) || (forceExpandPaths?.has(path) ?? false),
+    [expandedPaths, forceExpandPaths],
+  )
 
   const toggleExpand = useCallback((path: string) => {
     setExpandedPaths((prev) => {

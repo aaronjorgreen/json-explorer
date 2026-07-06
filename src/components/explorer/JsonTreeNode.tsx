@@ -1,8 +1,10 @@
 import type { KeyboardEvent } from 'react'
 import { ChevronDown, ChevronRight } from 'lucide-react'
+import { HighlightText } from '@/components/explorer/HighlightText'
 import { Badge } from '@/components/ui/Badge'
-import { formatValue } from '@/lib/format'
+import { useSearch } from '@/hooks/useSearch'
 import { useTreeExpand } from '@/hooks/useTreeExpand'
+import { formatValue } from '@/lib/format'
 import type { JsonNode } from '@/types/json'
 
 interface JsonTreeNodeProps {
@@ -28,10 +30,14 @@ function isExpandable(node: JsonNode): boolean {
 
 export function JsonTreeNode({ node, depth }: JsonTreeNodeProps) {
   const { isExpanded, toggleExpand } = useTreeExpand()
+  const { debouncedQuery, matches, currentIndex, isSearchActive } = useSearch()
   const expandable = isExpandable(node)
   const expanded = expandable && isExpanded(node.path)
   const count = childCount(node)
   const children = getChildren(node)
+
+  const isCurrentMatch = matches[currentIndex]?.path === node.path
+  const rowHighlight = isSearchActive && isCurrentMatch
 
   const handleToggle = () => {
     if (expandable) {
@@ -46,10 +52,13 @@ export function JsonTreeNode({ node, depth }: JsonTreeNodeProps) {
     }
   }
 
+  const valueText = node.type === 'primitive' ? formatValue(node.value) : ''
+
   return (
     <div role="treeitem" aria-expanded={expandable ? expanded : undefined}>
       <div
-        className="group flex min-h-8 items-center gap-1 rounded-input py-0.5 pr-2 hover:bg-base/60"
+        data-path={node.path}
+        className={`group flex min-h-8 items-center gap-1 rounded-input py-0.5 pr-2 hover:bg-base/60 ${rowHighlight ? 'bg-accent/10 ring-1 ring-accent/50' : ''}`}
         style={{ paddingLeft: `${depth * 16 + 8}px` }}
       >
         {expandable ? (
@@ -72,12 +81,24 @@ export function JsonTreeNode({ node, depth }: JsonTreeNodeProps) {
         )}
 
         {node.key !== undefined ? (
-          <span className="text-accent-light">{node.key}</span>
+          <span className="text-accent-light">
+            <HighlightText
+              text={node.key}
+              query={isSearchActive ? debouncedQuery : ''}
+              isCurrent={isCurrentMatch && matches[currentIndex]?.field === 'key'}
+            />
+          </span>
         ) : null}
         {node.key !== undefined ? <span className="text-text-muted">: </span> : null}
 
         {node.type === 'primitive' ? (
-          <span className="break-all text-text-primary">{formatValue(node.value)}</span>
+          <span className="break-all text-text-primary">
+            <HighlightText
+              text={valueText}
+              query={isSearchActive ? debouncedQuery : ''}
+              isCurrent={isCurrentMatch && matches[currentIndex]?.field === 'value'}
+            />
+          </span>
         ) : (
           <span className="flex items-center gap-2">
             <Badge variant="muted">{node.type}</Badge>
