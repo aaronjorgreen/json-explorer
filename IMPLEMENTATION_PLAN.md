@@ -16,7 +16,7 @@
 
 | Phase | Name | Status |
 |-------|------|--------|
-| 0 | Repo & tooling setup | `[ ]` Not started |
+| 0 | Repo & tooling setup | `[x]` Done |
 | 1 | Foundation & brand shell | `[ ]` Not started |
 | 2 | Input & validation | `[ ]` Not started |
 | 3 | Tree builder & explorer | `[ ]` Not started |
@@ -36,9 +36,9 @@ Apply these throughout every phase.
 
 ### Repository & Git
 
-- [ ] Initialize git with a sensible `.gitignore` (node_modules, dist, .env, .DS_Store)
-- [ ] Connect remote: `https://github.com/aaronjorgreen/json-explorer`
-- [ ] Default branch: `main`
+- [x] Initialize git with a sensible `.gitignore` (node_modules, dist, .env, .DS_Store)
+- [x] Connect remote: `https://github.com/aaronjorgreen/json-explorer`
+- [x] Default branch: `main`
 - [ ] Commit message format: `type(scope): description`
   - Types: `feat`, `fix`, `refactor`, `style`, `docs`, `chore`, `test`
   - Example: `feat(parse): add line/column error extraction`
@@ -82,7 +82,7 @@ src/
 
 ### TypeScript
 
-- [ ] `strict: true` in `tsconfig.json`
+- [x] `strict: true` in `tsconfig.json`
 - [ ] No `any` — use `unknown` at parse boundaries, then narrow
 - [ ] Export domain types from `src/types/json.ts`
 - [ ] Prefer `interface` for object shapes; `type` for unions
@@ -98,7 +98,7 @@ src/
 
 ### Styling (Tailwind)
 
-- [ ] Define design tokens in `tailwind.config.js` — never hardcode hex in components
+- [x] Define design tokens in `tailwind.config.js` — never hardcode hex in components
 - [ ] Use semantic token names: `bg-surface`, `border-accent`, `text-muted`
 - [ ] Mobile-first responsive classes: base → `md:` → `lg:`
 - [ ] Min touch target: `min-h-11 min-w-11` (44px) on interactive elements
@@ -139,8 +139,8 @@ Priority: **`lib/` unit tests** — highest ROI, no DOM needed.
 | `searchTree.ts` | Key match, value match, case-insensitive, no match |
 | `format.ts` | Stringify, value preview, type labels |
 
-- [ ] Set up Vitest (ships with Vite)
-- [ ] Add test script: `npm run test`
+- [x] Set up Vitest (ships with Vite)
+- [x] Add test script: `npm run test`
 - [ ] Component tests optional for MVP — manual QA checklist per phase
 
 ### Dependencies
@@ -165,15 +165,15 @@ Keep the dependency tree minimal.
 
 ### Checklist
 
-- [ ] `npm create vite@latest . -- --template react-ts` (or equivalent scaffold)
-- [ ] Install Tailwind CSS + configure `tailwind.config.js` with Structra tokens
-- [ ] Install Lucide React
-- [ ] Configure path alias `@/` → `src/` in `vite.config.ts` and `tsconfig.json`
-- [ ] Add ESLint (Vite default) — fix all lint errors before Phase 1 exit
-- [ ] Add Vitest + one smoke test (`expect(true).toBe(true)`) to verify runner
-- [ ] Create folder structure per **Code Organization** above
-- [ ] Add `.gitignore`, initial commit, push to GitHub remote
-- [ ] Update `README.md` with project name, tagline, and dev commands
+- [x] `npm create vite@latest . -- --template react-ts` (or equivalent scaffold)
+- [x] Install Tailwind CSS + configure `tailwind.config.js` with Structra tokens
+- [x] Install Lucide React
+- [x] Configure path alias `@/` → `src/` in `vite.config.ts` and `tsconfig.json`
+- [x] Add ESLint (Vite default) — fix all lint errors before Phase 1 exit
+- [x] Add Vitest + one smoke test (`expect(true).toBe(true)`) to verify runner
+- [x] Create folder structure per **Code Organization** above
+- [x] Add `.gitignore`, initial commit, push to GitHub remote
+- [x] Update `README.md` with project name, tagline, and dev commands
 
 ### Design Tokens (`tailwind.config.js`)
 
@@ -189,10 +189,10 @@ colors: {
 
 ### Exit Criteria
 
-- [ ] `npm run dev` starts without errors
-- [ ] `npm run build` succeeds
-- [ ] `npm run test` passes
-- [ ] Repo pushed to GitHub
+- [x] `npm run dev` starts without errors
+- [x] `npm run build` succeeds
+- [x] `npm run test` passes
+- [x] Repo pushed to GitHub
 
 ---
 

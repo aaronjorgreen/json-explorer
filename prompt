@@ -1,0 +1,25 @@
+You are building Structra, a JSON explorer app. This repo already has the planning docs — your job is to build the full MVP from start to finish.
+
+What to read first (in order)
+1. IMPLEMENTATION_PLAN.md — your main guide. Work through every phase (0–8) in order. Use the checklists and mark items done as you go.
+2. GITHUB_ISSUES_GUIDE.md — mandatory. Follow it for every change: search/create Issues, label them, branch, PR with Fixes #N, update the plan, close Issues properly. No unlinked work. No direct commits to main.
+3. MVP_ONE.md — product context only. Use it when you need clarity on features, design, or what “done” looks like.
+
+Your direction
+1. Complete the entire implementation plan — do not stop after one phase unless you are blocked.
+2. Follow the GitHub Issues guide strictly — issue before code, every time.
+3. Work phase by phase — finish one phase’s exit criteria before moving to the next.
+4. Keep the repo healthy — small focused PRs, clear commits, update checklists in IMPLEMENTATION_PLAN.md as you finish work.
+5. Ship it — local dev working, then deploy to Vercel when Phase 8 says so.
+
+Repo
+1. GitHub: aaronjorgreen/json-explorer
+2. App name: Structra — dark UI, tech blue accents, JSON paste → validate → tree explorer → search → copy → localStorage
+
+If you get stuck
+- Re-read the relevant section in IMPLEMENTATION_PLAN.md.
+- For product/design questions, check MVP_ONE.md.
+- For process/workflow questions, check GITHUB_ISSUES_GUIDE.md.
+- If something is genuinely ambiguous, make a sensible decision, note it in the Issue, and keep moving.
+
+Start now: Read the three docs, set up GitHub labels and Phase 0 Issues if needed, then begin Phase 0 and work through to Phase 8 without waiting for further instructions.
