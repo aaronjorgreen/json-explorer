@@ -17,7 +17,7 @@
 | Phase | Name | Status |
 |-------|------|--------|
 | 0 | Repo & tooling setup | `[x]` Done |
-| 1 | Foundation & brand shell | `[ ]` Not started |
+| 1 | Foundation & brand shell | `[x]` Done |
 | 2 | Input & validation | `[ ]` Not started |
 | 3 | Tree builder & explorer | `[ ]` Not started |
 | 4 | Search & highlight | `[ ]` Not started |
@@ -202,23 +202,23 @@ colors: {
 
 ### Checklist
 
-- [ ] Create `src/types/json.ts` — stub `JsonNode` union type
-- [ ] Create `src/styles/index.css` — Tailwind directives, font imports (Inter + JetBrains Mono)
-- [ ] Build `Logo.tsx` — inline SVG `{ }` with tech blue gradient
-- [ ] Build `Header.tsx` — logo, wordmark "Structra", placeholder search/copy/menu slots
-- [ ] Build `MainLayout.tsx`:
-  - [ ] Desktop (`lg:`): resizable split panels (40/60) with drag handle
-  - [ ] Mobile: stacked layout with placeholder panels
-- [ ] Build placeholder `InputPanel.tsx` and `ExplorerPanel.tsx` (empty states)
-- [ ] Build reusable `Button.tsx`, `Badge.tsx` in `components/ui/`
-- [ ] Wire `App.tsx` → `MainLayout` with dark theme applied globally
-- [ ] Verify layout at 375px, 768px, 1440px (no horizontal overflow)
+- [x] Create `src/types/json.ts` — stub `JsonNode` union type
+- [x] Create `src/styles/index.css` — Tailwind directives, font imports (Inter + JetBrains Mono)
+- [x] Build `Logo.tsx` — inline SVG `{ }` with tech blue gradient
+- [x] Build `Header.tsx` — logo, wordmark "Structra", placeholder search/copy/menu slots
+- [x] Build `MainLayout.tsx`:
+  - [x] Desktop (`lg:`): resizable split panels (40/60) with drag handle
+  - [x] Mobile: stacked layout with placeholder panels
+- [x] Build placeholder `InputPanel.tsx` and `ExplorerPanel.tsx` (empty states)
+- [x] Build reusable `Button.tsx`, `Badge.tsx` in `components/ui/`
+- [x] Wire `App.tsx` → `MainLayout` with dark theme applied globally
+- [x] Verify layout at 375px, 768px, 1440px (no horizontal overflow)
 
 ### Exit Criteria
 
-- [ ] Branded dark UI loads at `localhost:5173`
-- [ ] Header, split layout, and placeholders render correctly on desktop and mobile
-- [ ] All interactive elements have focus styles
+- [x] Branded dark UI loads at `localhost:5173`
+- [x] Header, split layout, and placeholders render correctly on desktop and mobile
+- [x] All interactive elements have focus styles
 
 ---
 
