@@ -15,12 +15,45 @@ npm run test
 npm run lint
 ```
 
+## Deploy to Vercel
+
+Structra is a Vite SPA. Production deploy uses `vercel.json` for client-side routing rewrites.
+
+### One-time setup
+
+1. Push the repo to GitHub: [aaronjorgreen/json-explorer](https://github.com/aaronjorgreen/json-explorer)
+2. Sign in at [vercel.com](https://vercel.com) and **Add New Project**
+3. Import `aaronjorgreen/json-explorer`
+4. Framework preset: **Vite**
+5. Build command: `npm run build`
+6. Output directory: `dist`
+7. Deploy
+
+No environment variables are required for the MVP.
+
+### Live URL
+
+> **Note:** Connecting the GitHub repo to Vercel requires account access. After you complete the steps above, add your production URL here:
+>
+> `https://your-project.vercel.app`
+
+### Production smoke test
+
+After deploy, verify:
+
+- Paste sample JSON → tree renders
+- Invalid JSON → error with line/column/character position
+- Search + highlight + prev/next navigation
+- Copy to clipboard
+- Refresh → localStorage restore
+
 ## Tech Stack
 
-- React 18+ / TypeScript
+- React 19 / TypeScript
 - Vite
 - Tailwind CSS
 - Lucide React
+- @tanstack/react-virtual
 - Vitest
 
 ## Documentation
