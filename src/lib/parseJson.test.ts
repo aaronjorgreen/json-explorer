@@ -38,10 +38,10 @@ describe('parseJson', () => {
 
     expect(result.ok).toBe(false)
     if (!result.ok) {
-      expect(result.error.message.toLowerCase()).toContain('json')
-      expect(result.error.line).toBeGreaterThan(0)
+      expect(result.error.message).toContain("']'")
+      expect(result.error.line).toBe(2)
       expect(result.error.column).toBeGreaterThan(0)
-      expect(result.error.character).toBeGreaterThanOrEqual(0)
+      expect(result.error.character).toBeGreaterThan(0)
     }
   })
 
