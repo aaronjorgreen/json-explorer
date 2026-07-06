@@ -1,7 +1,12 @@
+import { JsonDocumentProvider } from '@/hooks/JsonDocumentContext'
 import { MainLayout } from '@/app/MainLayout'
 
 function App() {
-  return <MainLayout />
+  return (
+    <JsonDocumentProvider>
+      <MainLayout />
+    </JsonDocumentProvider>
+  )
 }
 
 export default App

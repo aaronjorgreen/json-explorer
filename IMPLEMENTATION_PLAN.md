@@ -18,7 +18,7 @@
 |-------|------|--------|
 | 0 | Repo & tooling setup | `[x]` Done |
 | 1 | Foundation & brand shell | `[x]` Done |
-| 2 | Input & validation | `[~]` In progress |
+| 2 | Input & validation | `[x]` Done |
 | 3 | Tree builder & explorer | `[ ]` Not started |
 | 4 | Search & highlight | `[ ]` Not started |
 | 5 | Copy, persistence & polish | `[ ]` Not started |
@@ -237,32 +237,32 @@ colors: {
 
 #### `hooks/useJsonDocument.ts`
 
-- [ ] State: `rawInput`, `parseResult`, `isParsing`
-- [ ] Debounced parse (300ms) on input change
-- [ ] Manual parse trigger (Parse button + `Cmd/Ctrl+Enter`)
-- [ ] Do not update tree state when parse fails
+- [x] State: `rawInput`, `parseResult`, `isParsing`
+- [x] Debounced parse (300ms) on input change
+- [x] Manual parse trigger (Parse button + `Cmd/Ctrl+Enter`)
+- [x] Do not update tree state when parse fails
 
 #### Components
 
-- [ ] `JsonTextarea.tsx` — monospace, full-height, placeholder copy
-- [ ] `ParseErrorBanner.tsx` — message + `Line X, Column Y (char Z)` + `role="alert"`
-- [ ] `DropZone.tsx` — drag-over overlay, accepts `.json` files
-- [ ] File upload via hidden `<input type="file">` in header/menu
-- [ ] Parse loading overlay when input > 100KB ("Parsing…")
-- [ ] Wire `InputPanel` with textarea, drop zone, error banner
+- [x] `JsonTextarea.tsx` — monospace, full-height, placeholder copy
+- [x] `ParseErrorBanner.tsx` — message + `Line X, Column Y (char Z)` + `role="alert"`
+- [x] `DropZone.tsx` — drag-over overlay, accepts `.json` files
+- [x] File upload via hidden `<input type="file">` in header/menu
+- [x] Parse loading overlay when input > 100KB ("Parsing…")
+- [x] Wire `InputPanel` with textarea, drop zone, error banner
 
 #### File Handling
 
-- [ ] Read file via `FileReader.readAsText`
-- [ ] Display file name + size badge after upload
-- [ ] Soft warn > 5MB; reject > 10MB with friendly message
+- [x] Read file via `FileReader.readAsText`
+- [x] Display file name + size badge after upload
+- [x] Soft warn > 5MB; reject > 10MB with friendly message
 
 ### Exit Criteria
 
-- [ ] Paste, upload, and drag-drop all populate textarea and trigger parse
-- [ ] Invalid JSON shows line, column, and character position
-- [ ] Valid JSON sets `parseResult.ok = true` (tree not built yet — Phase 3)
-- [ ] `parseJson` unit tests pass
+- [x] Paste, upload, and drag-drop all populate textarea and trigger parse
+- [x] Invalid JSON shows line, column, and character position
+- [x] Valid JSON sets `parseResult.ok = true` (tree not built yet — Phase 3)
+- [x] `parseJson` unit tests pass
 
 ---
 
