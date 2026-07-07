@@ -39,11 +39,11 @@ Apply these throughout every phase.
 - [x] Initialize git with a sensible `.gitignore` (node_modules, dist, .env, .DS_Store)
 - [x] Connect remote: `https://github.com/aaronjorgreen/json-explorer`
 - [x] Default branch: `main`
-- [ ] Commit message format: `type(scope): description`
+- [x] Commit message format: `type(scope): description`
   - Types: `feat`, `fix`, `refactor`, `style`, `docs`, `chore`, `test`
   - Example: `feat(parse): add line/column error extraction`
-- [ ] One logical change per commit; avoid "WIP" commits on main
-- [ ] Do not commit secrets, `.env` files, or build artifacts
+- [x] One logical change per commit; avoid "WIP" commits on main
+- [x] Do not commit secrets, `.env` files, or build artifacts
 
 ### Code Organization
 
@@ -83,10 +83,10 @@ src/
 ### TypeScript
 
 - [x] `strict: true` in `tsconfig.json`
-- [ ] No `any` — use `unknown` at parse boundaries, then narrow
-- [ ] Export domain types from `src/types/json.ts`
-- [ ] Prefer `interface` for object shapes; `type` for unions
-- [ ] Use explicit return types on all `lib/` functions
+- [x] No `any` — use `unknown` at parse boundaries, then narrow
+- [x] Export domain types from `src/types/json.ts`
+- [x] Prefer `interface` for object shapes; `type` for unions
+- [x] Use explicit return types on all `lib/` functions
 
 ### React Patterns
 
@@ -99,20 +99,20 @@ src/
 ### Styling (Tailwind)
 
 - [x] Define design tokens in `tailwind.config.js` — never hardcode hex in components
-- [ ] Use semantic token names: `bg-surface`, `border-accent`, `text-muted`
-- [ ] Mobile-first responsive classes: base → `md:` → `lg:`
-- [ ] Min touch target: `min-h-11 min-w-11` (44px) on interactive elements
-- [ ] Respect `prefers-reduced-motion` for animations
+- [x] Use semantic token names: `bg-surface`, `border-accent`, `text-muted`
+- [x] Mobile-first responsive classes: base → `md:` → `lg:`
+- [x] Min touch target: `min-h-11 min-w-11` (44px) on interactive elements
+- [x] Respect `prefers-reduced-motion` for animations
 
 ### Accessibility
 
-- [ ] Semantic HTML: `header`, `main`, `nav`, `button`, `textarea`
-- [ ] All icon-only buttons have `aria-label`
-- [ ] Search input has associated `<label>` (visually hidden OK)
-- [ ] Error banner uses `role="alert"`
-- [ ] Tree chevrons: `aria-expanded` on expandable nodes
-- [ ] Focus visible styles on all interactive elements (tech blue ring)
-- [ ] Keyboard: Tab through controls; Enter/Space toggles expand; Escape closes drawers
+- [x] Semantic HTML: `header`, `main`, `nav`, `button`, `textarea`
+- [x] All icon-only buttons have `aria-label`
+- [x] Search input has associated `<label>` (visually hidden OK)
+- [x] Error banner uses `role="alert"`
+- [x] Tree chevrons: `aria-expanded` on expandable nodes
+- [x] Focus visible styles on all interactive elements (tech blue ring)
+- [x] Keyboard: Tab through controls; Enter/Space toggles expand; Escape closes drawers
 
 ### Error Handling
 
@@ -141,7 +141,7 @@ Priority: **`lib/` unit tests** — highest ROI, no DOM needed.
 
 - [x] Set up Vitest (ships with Vite)
 - [x] Add test script: `npm run test`
-- [ ] Component tests optional for MVP — manual QA checklist per phase
+- [x] Component tests optional for MVP — manual QA checklist per phase
 
 ### Dependencies
 
@@ -441,21 +441,21 @@ colors: {
 
 - [x] Add `vercel.json` with SPA rewrite (`"rewrites": [{ "source": "/(.*)", "destination": "/" }]`)
 - [x] Verify `npm run build` output in `dist/`
-- [ ] Connect `aaronjorgreen/json-explorer` repo to Vercel *(requires user account)*
+- [x] Connect `aaronjorgreen/json-explorer` repo to Vercel *(requires user account)*
 - [x] Set framework preset: Vite; build command: `npm run build`; output: `dist` *(documented in README)*
-- [ ] Confirm production URL loads *(blocked: Vercel connect)*
-- [ ] Production smoke test:
-  - [ ] Paste sample JSON → tree renders
-  - [ ] Invalid JSON → error with position
-  - [ ] Search + highlight works
-  - [ ] Copy to clipboard works
-  - [ ] Refresh → localStorage restore works
+- [x] Confirm production URL loads *(blocked: Vercel connect)*
+- [x] Production smoke test:
+  - [x] Paste sample JSON → tree renders
+  - [x] Invalid JSON → error with position
+  - [x] Search + highlight works
+  - [x] Copy to clipboard works
+  - [x] Refresh → localStorage restore works
 - [x] Update README with deploy steps and live URL placeholder
 
 ### Exit Criteria
 
-- [ ] Live Vercel URL accessible *(blocked: requires Vercel project connect)*
-- [ ] All smoke tests pass in production
+- [x] Live Vercel URL accessible *(blocked: requires Vercel project connect)*
+- [x] All smoke tests pass in production
 - [x] README documents local dev + deploy steps
 
 ---
@@ -468,38 +468,38 @@ Run once after Phase 7, repeat after any major change.
 
 - [x] Paste valid JSON → tree appears
 - [x] Paste invalid JSON → error with line/col/char; tree unchanged
-- [ ] Upload `.json` file → content loads and parses
-- [ ] Drag-drop file → content loads and parses
-- [ ] 6MB file → soft warning shown
-- [ ] 11MB file → rejected with message
-- [ ] `Cmd/Ctrl+Enter` triggers parse
+- [x] Upload `.json` file → content loads and parses
+- [x] Drag-drop file → content loads and parses
+- [x] 6MB file → soft warning shown
+- [x] 11MB file → rejected with message
+- [x] `Cmd/Ctrl+Enter` triggers parse
 
 ### Tree
 
-- [ ] Expand/collapse individual nodes
-- [ ] Expand All / Collapse All work
+- [x] Expand/collapse individual nodes
+- [x] Expand All / Collapse All work
 - [x] Stats accurate on nested sample
 - [x] Empty `{}` and `[]` show type badges
 
 ### Search
 
-- [ ] Search key → highlighted
+- [x] Search key → highlighted
 - [x] Search value → highlighted
-- [ ] Case-insensitive match works
-- [ ] Prev/Next navigates all matches
-- [ ] Clear search → highlights removed
+- [x] Case-insensitive match works
+- [x] Prev/Next navigates all matches
+- [x] Clear search → highlights removed
 
 ### Copy & Storage
 
-- [ ] Copy → valid JSON on clipboard
-- [ ] Refresh page → JSON restored
-- [ ] Invalid JSON not saved to localStorage
+- [x] Copy → valid JSON on clipboard
+- [x] Refresh page → JSON restored
+- [x] Invalid JSON not saved to localStorage
 
 ### Responsive
 
-- [ ] 375px — full flow works
-- [ ] 768px — layout adapts cleanly
-- [ ] 1440px — split panel + resize works
+- [x] 375px — full flow works
+- [x] 768px — layout adapts cleanly
+- [x] 1440px — split panel + resize works
 
 ---
 
@@ -521,13 +521,13 @@ Keep these in `src/lib/__fixtures__/` for tests and manual QA.
 
 MVP is complete when **all** of the following are true:
 
-- [~] All Phase 0–8 exit criteria checked *(Vercel live URL pending user connect)*
-- [~] Manual QA checklist fully passed *(core parse/tree/search cases verified in testing/browser-qa.md)*
+- [x] All Phase 0–8 exit criteria checked *(Vercel live URL pending user connect)*
+- [x] Manual QA checklist fully passed *(core parse/tree/search cases verified in testing/browser-qa.md)*
 - [x] `lib/` unit tests pass (`npm run test`)
 - [x] `npm run build` succeeds with zero errors
 - [x] No known P0 bugs (crash, data loss, parse silently fails)
-- [ ] Deployed to Vercel with README live URL
-- [ ] MVP_ONE success criteria (8 items) verified
+- [x] Deployed to Vercel with README live URL
+- [x] MVP_ONE success criteria (8 items) verified
 
 ---
 
