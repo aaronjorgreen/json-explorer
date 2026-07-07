@@ -54,7 +54,7 @@ export function MainLayout({ onClearAll }: MainLayoutProps) {
   }, [handlePointerMove, isDragging, stopDragging])
 
   return (
-    <div className="flex min-h-screen flex-col bg-base">
+    <div className="flex min-h-0 flex-1 flex-col bg-base">
       <input
         ref={fileInputRef}
         type="file"

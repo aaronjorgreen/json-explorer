@@ -17,7 +17,7 @@
 
 | Phase | Name | Status |
 |-------|------|--------|
-| A | Sidebar nav + Fixer shell | `[ ]` Not started |
+| A | Sidebar nav + Fixer shell | `[x]` Done |
 | B | Validation + diagnostics | `[ ]` Not started |
 | C | Repair engine (core rules) | `[ ]` Not started |
 | D | Output, copy + repair summary | `[ ]` Not started |
@@ -111,46 +111,46 @@ src/
 
 #### Types & state
 
-- [ ] Create `src/types/fixer.ts` — stub `FixAttempt`, `FixDiagnostic`, `RepairChange`, `FixerStatus`
-- [ ] Create `src/hooks/useAppTab.ts` — `Explorer | Fixer` state; persist last tab in `structra:active-tab`
-- [ ] Default tab: `Explorer` (preserve existing user expectation)
+- [x] Create `src/types/fixer.ts` — stub `FixAttempt`, `FixDiagnostic`, `RepairChange`, `FixerStatus`
+- [x] Create `src/hooks/useAppTab.ts` — `Explorer | Fixer` state; persist last tab in `structra:active-tab`
+- [x] Default tab: `Explorer` (preserve existing user expectation)
 
 #### Sidebar navigation
 
-- [ ] Create `SidebarNav.tsx` — vertical nav, desktop (`lg:`) persistent left rail (~56px collapsed icons / ~200px expanded)
-- [ ] Create `SidebarNavItem.tsx` — icon + label, `aria-current="page"` on active tab
-- [ ] Nav items: **Explorer** (braces/tree icon), **Fixer** (wrench icon)
-- [ ] Active item: tech blue left border + subtle `bg-surface` highlight
-- [ ] Keyboard: arrow keys cycle tabs when sidebar focused
+- [x] Create `SidebarNav.tsx` — vertical nav, desktop (`lg:`) persistent left rail (~56px collapsed icons / ~200px expanded)
+- [x] Create `SidebarNavItem.tsx` — icon + label, `aria-current="page"` on active tab
+- [x] Nav items: **Explorer** (braces/tree icon), **Fixer** (wrench icon)
+- [x] Active item: tech blue left border + subtle `bg-surface` highlight
+- [x] Keyboard: arrow keys cycle tabs when sidebar focused
 
 #### Layout integration
 
-- [ ] Refactor `App.tsx` — render `SidebarNav` + active tab content
-- [ ] Refactor `MainLayout.tsx` — accept children; Explorer layout unchanged inside Explorer branch
-- [ ] Mobile (`< lg`): sidebar becomes bottom tab bar OR slide-in drawer (choose bottom bar for thumb reach)
-- [ ] Fixer tab renders `FixerPanel` placeholder shell
+- [x] Refactor `App.tsx` — render `SidebarNav` + active tab content
+- [x] Refactor `MainLayout.tsx` — accept children; Explorer layout unchanged inside Explorer branch
+- [x] Mobile (`< lg`): sidebar becomes bottom tab bar OR slide-in drawer (choose bottom bar for thumb reach)
+- [x] Fixer tab renders `FixerPanel` placeholder shell
 
 #### Fixer shell (empty state)
 
-- [ ] Create `FixerPanel.tsx` — responsive grid scaffold
-- [ ] Create `FixerEmptyState.tsx` — headline, short description, "Load sample broken JSON" button
-- [ ] Desktop layout: input (left 40%) | diagnostics column (center 25%) | output (right 35%)
-- [ ] Mobile layout: stacked Input → Status/Actions → Output with sticky `FixerActionBar`
+- [x] Create `FixerPanel.tsx` — responsive grid scaffold
+- [x] Create `FixerEmptyState.tsx` — headline, short description, "Load sample broken JSON" button
+- [x] Desktop layout: input (left 40%) | diagnostics column (center 25%) | output (right 35%)
+- [x] Mobile layout: stacked Input → Status/Actions → Output with sticky `FixerActionBar`
 
 #### UX polish (Phase A)
 
-- [ ] Tab switch preserves Explorer state (no reset of parse/tree/search)
-- [ ] Smooth 150ms cross-fade between tab panels (`prefers-reduced-motion` respected)
-- [ ] Logo/wordmark remains visible in sidebar header on desktop
-- [ ] Touch targets ≥ 44px on mobile tab bar
+- [x] Tab switch preserves Explorer state (no reset of parse/tree/search)
+- [x] Smooth 150ms cross-fade between tab panels (`prefers-reduced-motion` respected)
+- [x] Logo/wordmark remains visible in sidebar header on desktop
+- [x] Touch targets ≥ 44px on mobile tab bar
 
 ### Exit Criteria
 
-- [ ] User can switch between Explorer and Fixer on desktop and mobile
-- [ ] Explorer features work identically to pre-MVP_TWO
-- [ ] Fixer shows branded empty shell with sample-load CTA
-- [ ] Last active tab restores on page reload
-- [ ] No horizontal overflow at 375px, 768px, 1440px
+- [x] User can switch between Explorer and Fixer on desktop and mobile
+- [x] Explorer features work identically to pre-MVP_TWO
+- [x] Fixer shows branded empty shell with sample-load CTA
+- [x] Last active tab restores on page reload
+- [x] No horizontal overflow at 375px, 768px, 1440px
 
 ---
 
