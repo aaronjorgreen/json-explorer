@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDebouncedValue } from '@/hooks/useDebouncedValue'
 import { validateJson } from '@/lib/fixer/validateJson'
 import { repairJson } from '@/lib/fixer/repairJson'
-import type { FixerStatus, ValidationResult, RepairResult } from '@/types/fixer'
+import type { FixAttempt, FixerStatus, ValidationResult, RepairResult } from '@/types/fixer'
 
 export interface UseFixerResult {
   rawInput: string
@@ -17,6 +17,7 @@ export interface UseFixerResult {
   fixJson: () => void
   undoFix: () => void
   clearInput: () => void
+  restoreFromAttempt: (attempt: FixAttempt) => void
   canUndo: boolean
 }
 
@@ -152,6 +153,30 @@ export function useFixer(): UseFixerResult {
     setStatus('idle')
   }, [])
 
+  const restoreFromAttempt = useCallback((attempt: FixAttempt) => {
+    setRawInputState(attempt.originalInput)
+    setPreviousInput(null)
+    setRepairResult({
+      success: attempt.success,
+      output: attempt.fixedOutput,
+      changes: attempt.changes,
+      errorsBefore: attempt.errorsBefore,
+      errorsAfter: attempt.errorsAfter,
+    })
+
+    if (attempt.success && attempt.fixedOutput) {
+      setStatus('repaired')
+      setValidationResult(validateJson(attempt.fixedOutput))
+    } else if (attempt.errorsAfter.length > 0) {
+      setStatus('failed')
+      setValidationResult({ ok: false, error: attempt.errorsAfter[0] })
+    } else {
+      const result = validateJson(attempt.originalInput)
+      setValidationResult(result)
+      setStatus(result.ok ? 'valid' : 'invalid')
+    }
+  }, [])
+
   return useMemo(
     () => ({
       rawInput,
@@ -166,8 +191,9 @@ export function useFixer(): UseFixerResult {
       fixJson,
       undoFix,
       clearInput,
+      restoreFromAttempt,
       canUndo,
     }),
-    [rawInput, setRawInput, status, validationResult, repairResult, previousInput, lineCount, charCount, validateNow, fixJson, undoFix, clearInput, canUndo],
+    [rawInput, setRawInput, status, validationResult, repairResult, previousInput, lineCount, charCount, validateNow, fixJson, undoFix, clearInput, restoreFromAttempt, canUndo],
   )
 }
