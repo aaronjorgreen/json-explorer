@@ -47,6 +47,14 @@ export function FixerPanel({ onOpenInExplorer }: FixerPanelProps) {
     lastRecordedRepair.current = signature
   }, [fixer.status, fixer.repairResult, fixer.rawInput, history])
 
+  const isRepaired = fixer.status === 'repaired'
+
+  useEffect(() => {
+    if (isRepaired) {
+      setOutputExpanded(true)
+    }
+  }, [isRepaired])
+
   if (!fixer.rawInput.trim() && fixer.status === 'idle') {
     return (
       <div className="flex h-full flex-col gap-4 rounded-card border border-border bg-surface p-4">
@@ -70,14 +78,7 @@ export function FixerPanel({ onOpenInExplorer }: FixerPanelProps) {
   const outputText = fixer.repairResult?.success ? fixer.repairResult.output : null
   const outputLineCount = outputText ? outputText.split('\n').length : 0
   const outputCharCount = outputText?.length ?? 0
-  const isRepaired = fixer.status === 'repaired'
   const showOutput = isRepaired || outputExpanded
-
-  useEffect(() => {
-    if (isRepaired) {
-      setOutputExpanded(true)
-    }
-  }, [isRepaired])
 
   const handleCopy = async () => {
     if (!outputText) return
