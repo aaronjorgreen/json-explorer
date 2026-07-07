@@ -5,8 +5,10 @@
 **Repository:** [aaronjorgreen/json-explorer](https://github.com/aaronjorgreen/json-explorer)
 
 **Related docs:**
-- [MVP_ONE.md](./MVP_ONE.md) — product scope and success criteria
-- [IMPLEMENTATION_PLAN.md](./IMPLEMENTATION_PLAN.md) — build phases and checklists
+- [MVP_ONE.md](./docs/MVP_ONE.md) — product scope and success criteria (complete)
+- [MVP_TWO.md](./docs/MVP_TWO.md) — Fixer tab product scope
+- [IMPLEMENTATION_PLAN.md](./docs/IMPLEMENTATION_PLAN.md) — MVP_ONE build phases (complete)
+- [IMPLEMENTATION_PLAN_TWO.md](./docs/IMPLEMENTATION_PLAN_TWO.md) — MVP_TWO build phases
 
 ---
 
@@ -21,7 +23,7 @@ The following rules apply to **every** codebase change. No exceptions.
 | 3 | **One issue, one concern.** Each Issue covers a single logical unit of work. Split large work into multiple Issues. |
 | 4 | **Label before assign.** Apply all required labels at Issue creation. Update labels when scope or status changes. |
 | 5 | **Close via PR.** Issues MUST be closed by a merged PR using a closing keyword, or manually with a written reason — never silently abandoned. |
-| 6 | **Sync project docs.** When an Issue completes a checklist item, update [IMPLEMENTATION_PLAN.md](./IMPLEMENTATION_PLAN.md) in the same PR. |
+| 6 | **Sync project docs.** When an Issue completes a checklist item, update [IMPLEMENTATION_PLAN.md](./docs/IMPLEMENTATION_PLAN.md) in the same PR. |
 | 7 | **No direct commits to `main`.** All work goes through a branch and PR linked to an Issue. |
 | 8 | **Search before create.** Always search open and closed Issues before creating a duplicate. |
 
