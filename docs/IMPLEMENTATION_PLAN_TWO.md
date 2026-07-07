@@ -18,7 +18,7 @@
 | Phase | Name | Status |
 |-------|------|--------|
 | A | Sidebar nav + Fixer shell | `[x]` Done |
-| B | Validation + diagnostics | `[ ]` Not started |
+| B | Validation + diagnostics | `[x]` Done |
 | C | Repair engine (core rules) | `[ ]` Not started |
 | D | Output, copy + repair summary | `[ ]` Not started |
 | E | Repair history persistence | `[ ]` Not started |
@@ -164,42 +164,42 @@ src/
 
 #### `lib/fixer/validateJson.ts`
 
-- [ ] Implement `validateJson(input: string): ValidationResult`
-- [ ] Reuse `parseJson` error extraction (line, column, char) — do not duplicate logic
-- [ ] Return `{ ok: true, data }` or `{ ok: false, error: FixDiagnostic }`
-- [ ] Add friendly hint mapper: translate common `SyntaxError` messages to plain English
-- [ ] Unit tests: valid JSON, trailing comma, unquoted key, unclosed bracket
+- [x] Implement `validateJson(input: string): ValidationResult`
+- [x] Reuse `parseJson` error extraction (line, column, char) — do not duplicate logic
+- [x] Return `{ ok: true, data }` or `{ ok: false, error: FixDiagnostic }`
+- [x] Add friendly hint mapper: translate common `SyntaxError` messages to plain English
+- [x] Unit tests: valid JSON, trailing comma, unquoted key, unclosed bracket
 
 #### `hooks/useFixer.ts`
 
-- [ ] State: `rawInput`, `validationResult`, `status` (`idle` | `valid` | `invalid` | `repairing` | `repaired` | `failed`)
-- [ ] Debounced validate on input change (300ms)
-- [ ] Manual validate trigger (`Validate` button + `Cmd/Ctrl+Enter`)
-- [ ] `clearInput()` resets all Fixer state
+- [x] State: `rawInput`, `validationResult`, `status` (`idle` | `valid` | `invalid` | `repairing` | `repaired` | `failed`)
+- [x] Debounced validate on input change (300ms)
+- [x] Manual validate trigger (`Validate` button + `Cmd/Ctrl+Enter`)
+- [x] `clearInput()` resets all Fixer state
 
 #### Components
 
-- [ ] `FixerInput.tsx` — monospace textarea, line numbers gutter (CSS or lightweight overlay), placeholder copy
-- [ ] `FixerStatusBar.tsx` — badge: Valid / Invalid / Ready; show char count + line count
-- [ ] `FixerErrorPanel.tsx` — `role="alert"`; message, line/col/char, friendly hint, suggested next step
-- [ ] `FixerActionBar.tsx` — Validate (secondary), Fix JSON (primary, disabled when empty)
-- [ ] Highlight error line in input gutter when invalid (tech blue/red marker)
+- [x] `FixerInput.tsx` — monospace textarea, line numbers gutter (CSS or lightweight overlay), placeholder copy
+- [x] `FixerStatusBar.tsx` — badge: Valid / Invalid / Ready; show char count + line count
+- [x] `FixerErrorPanel.tsx` — `role="alert"`; message, line/col/char, friendly hint, suggested next step
+- [x] `FixerActionBar.tsx` — Validate (secondary), Fix JSON (primary, disabled when empty)
+- [x] Highlight error line in input gutter when invalid (tech blue/red marker)
 
 #### UX polish (Phase B)
 
-- [ ] Valid JSON: green status badge; Fix JSON enabled as "Normalize format" (optional label)
-- [ ] Invalid JSON: amber badge; error panel auto-expands; Fix JSON remains enabled
-- [ ] Empty input: neutral state; both actions disabled
-- [ ] Paste large text (>100KB): show lightweight "Validating…" indicator
-- [ ] Error panel includes "Jump to error line" — scrolls textarea to error offset
+- [x] Valid JSON: green status badge; Fix JSON enabled as "Normalize format" (optional label)
+- [x] Invalid JSON: amber badge; error panel auto-expands; Fix JSON remains enabled
+- [x] Empty input: neutral state; both actions disabled
+- [x] Paste large text (>100KB): show lightweight "Validating…" indicator
+- [x] Error panel includes "Jump to error line" — scrolls textarea to error offset
 
 ### Exit Criteria
 
-- [ ] Paste invalid JSON → invalid badge + error panel with line/col/char
-- [ ] Paste valid JSON → valid badge; no error panel
-- [ ] Validate button re-runs validation on demand
-- [ ] `validateJson` unit tests pass
-- [ ] Explorer tab unaffected
+- [x] Paste invalid JSON → invalid badge + error panel with line/col/char
+- [x] Paste valid JSON → valid badge; no error panel
+- [x] Validate button re-runs validation on demand
+- [x] `validateJson` unit tests pass
+- [x] Explorer tab unaffected
 
 ---
 
