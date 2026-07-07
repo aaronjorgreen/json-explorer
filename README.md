@@ -4,6 +4,11 @@
 
 A sleek, dark-first JSON explorer that treats JSON as structured data. Parse first, render from the tree — never manipulate raw strings for display.
 
+Structra includes two tabs:
+
+- **Explorer** — paste valid or invalid JSON, browse an interactive tree, search, copy, and restore sessions from localStorage.
+- **Fixer** — paste malformed JSON, validate syntax, auto-repair common issues (trailing commas, unquoted keys, missing commas), review a transparent repair summary, copy clean output, reopen repair history, and open fixed JSON in Explorer.
+
 ## Development
 
 ```bash
@@ -41,11 +46,19 @@ No environment variables are required for the MVP.
 
 After deploy, verify:
 
+**Explorer**
 - Paste sample JSON → tree renders
 - Invalid JSON → error with line/column/character position
 - Search + highlight + prev/next navigation
 - Copy to clipboard
 - Refresh → localStorage restore
+
+**Fixer**
+- Load sample broken JSON → invalid status shown
+- Fix JSON → formatted output + repair summary
+- Copy repaired JSON → valid parseable clipboard content
+- Open in Explorer → tree renders from fixed JSON
+- Repair history persists across refresh
 
 ## Tech Stack
 
@@ -58,8 +71,10 @@ After deploy, verify:
 
 ## Documentation
 
-- [MVP_ONE.md](./MVP_ONE.md) — product scope
-- [IMPLEMENTATION_PLAN.md](./IMPLEMENTATION_PLAN.md) — build phases
+- [MVP_ONE.md](./docs/MVP_ONE.md) — Explorer product scope
+- [MVP_TWO.md](./docs/MVP_TWO.md) — Fixer tab product scope
+- [IMPLEMENTATION_PLAN.md](./docs/IMPLEMENTATION_PLAN.md) — MVP_ONE build phases
+- [IMPLEMENTATION_PLAN_TWO.md](./docs/IMPLEMENTATION_PLAN_TWO.md) — MVP_TWO build phases
 - [GITHUB_ISSUES_GUIDE.md](./GITHUB_ISSUES_GUIDE.md) — contribution workflow
 
 ## License

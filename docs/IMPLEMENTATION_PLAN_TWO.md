@@ -22,7 +22,7 @@
 | C | Repair engine (core rules) | `[x]` Done |
 | D | Output, copy + repair summary | `[x]` Done |
 | E | Repair history persistence | `[x]` Done |
-| F | QA, polish + Explorer regression | `[ ]` Not started |
+| F | QA, polish + Explorer regression | `[x]` Done |
 
 **Legend:** `[ ]` Not started · `[~]` In progress · `[x]` Done
 
@@ -365,56 +365,56 @@ src/
 
 #### Test fixtures (`src/lib/__fixtures__/fixer/`)
 
-- [ ] `trailing-comma-object.json`
-- [ ] `trailing-comma-array.json`
-- [ ] `unquoted-keys.json`
-- [ ] `unquoted-keys-nested.json`
-- [ ] `missing-comma-object.json`
-- [ ] `missing-comma-array.json`
-- [ ] `mixed-errors.json`
-- [ ] `already-valid.json`
-- [ ] `unrecoverable.json`
+- [x] `trailing-comma-object.json`
+- [x] `trailing-comma-array.json`
+- [x] `unquoted-keys.json`
+- [x] `unquoted-keys-nested.json`
+- [x] `missing-comma-object.json`
+- [x] `missing-comma-array.json`
+- [x] `mixed-errors.json`
+- [x] `already-valid.json`
+- [x] `unrecoverable.json`
 
 #### Unit test coverage
 
-- [ ] `validateJson.test.ts` — all fixture cases
-- [ ] `repairRules.test.ts` — per-rule isolation tests
-- [ ] `repairJson.test.ts` — end-to-end pipeline tests
-- [ ] `repairSummary.test.ts` — summary formatting
-- [ ] `storageFixHistory.test.ts` — save/load/prune/delete
+- [x] `validateJson.test.ts` — all fixture cases
+- [x] `repairRules.test.ts` — per-rule isolation tests
+- [x] `repairJson.test.ts` — end-to-end pipeline tests
+- [x] `repairSummary.test.ts` — summary formatting
+- [x] `storageFixHistory.test.ts` — save/load/prune/delete
 
 #### Manual QA (desktop + mobile)
 
-- [ ] Paste broken JSON → validate → fix → copy → open in Explorer
-- [ ] Invalid JSON error panel accurate at multiple error positions
-- [ ] History reopen and delete flows
-- [ ] Tab switch preserves Explorer parse/tree/search state
-- [ ] 375px full Fixer flow (no horizontal scroll)
-- [ ] 768px tablet layout
-- [ ] 1440px desktop 3-panel layout
-- [ ] Keyboard shortcuts: Validate, Fix JSON
-- [ ] `prefers-reduced-motion` — no jarring animations
+- [x] Paste broken JSON → validate → fix → copy → open in Explorer
+- [x] Invalid JSON error panel accurate at multiple error positions
+- [x] History reopen and delete flows
+- [x] Tab switch preserves Explorer parse/tree/search state
+- [x] 375px full Fixer flow (no horizontal scroll)
+- [x] 768px tablet layout
+- [x] 1440px desktop 3-panel layout
+- [x] Keyboard shortcuts: Validate, Fix JSON
+- [x] `prefers-reduced-motion` — no jarring animations
 
 #### Explorer regression
 
-- [ ] Paste, parse, tree, search, copy, localStorage restore — all unchanged
-- [ ] Mobile Explorer drawer and hamburger — unchanged
-- [ ] Large file virtualization — unchanged
+- [x] Paste, parse, tree, search, copy, localStorage restore — all unchanged
+- [x] Mobile Explorer drawer and hamburger — unchanged
+- [x] Large file virtualization — unchanged
 
 #### Final polish
 
-- [ ] README updated with Fixer tab description
-- [ ] `docs/MVP_TWO.md` acceptance criteria verified
-- [ ] No console errors on happy path or common error paths
-- [ ] `npm run test` and `npm run build` pass
+- [x] README updated with Fixer tab description
+- [x] `docs/MVP_TWO.md` acceptance criteria verified
+- [x] No console errors on happy path or common error paths
+- [x] `npm run test` and `npm run build` pass
 
 ### Exit Criteria
 
-- [ ] All Phase A–E exit criteria still pass
-- [ ] Full manual QA checklist signed off
-- [ ] Explorer regression checklist signed off
-- [ ] All Fixer unit tests pass
-- [ ] Build succeeds with zero errors
+- [x] All Phase A–E exit criteria still pass
+- [x] Full manual QA checklist signed off
+- [x] Explorer regression checklist signed off
+- [x] All Fixer unit tests pass
+- [x] Build succeeds with zero errors
 
 ---
 
@@ -468,13 +468,13 @@ src/
 
 MVP_TWO is complete when **all** of the following are true:
 
-- [ ] All Phase A–F exit criteria checked
-- [ ] Manual QA checklist fully passed
-- [ ] `lib/fixer/` unit tests pass (`npm run test`)
-- [ ] `npm run build` succeeds with zero errors
-- [ ] No known P0 bugs (crash, data loss, silent corruption of JSON)
-- [ ] MVP_TWO acceptance criteria (11 items) verified
-- [ ] Explorer tab has zero functional regressions
+- [x] All Phase A–F exit criteria checked
+- [x] Manual QA checklist fully passed
+- [x] `lib/fixer/` unit tests pass (`npm run test`)
+- [x] `npm run build` succeeds with zero errors
+- [x] No known P0 bugs (crash, data loss, silent corruption of JSON)
+- [x] MVP_TWO acceptance criteria (11 items) verified
+- [x] Explorer tab has zero functional regressions
 
 ---
 
