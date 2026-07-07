@@ -1,4 +1,4 @@
-import type { FixDiagnostic, RepairChange, RepairResult } from '@/types/fixer'
+import type { FixDiagnostic, RepairChange, RepairConfidence, RepairResult } from '@/types/fixer'
 import { parseJson } from '@/lib/parseJson'
 import { normalizeWhitespace, removeTrailingCommas, quoteObjectKeys, insertMissingCommas } from '@/lib/fixer/repairRules'
 
@@ -11,6 +11,18 @@ function toDiagnostic(error: { message: string; line: number; column: number; ch
   }
 }
 
+interface RepairStage {
+  apply: (input: string) => { output: string; changes: RepairChange[] }
+  confidence: RepairConfidence
+}
+
+const REPAIR_STAGES: RepairStage[] = [
+  { apply: normalizeWhitespace, confidence: 'high' },
+  { apply: removeTrailingCommas, confidence: 'high' },
+  { apply: quoteObjectKeys, confidence: 'high' },
+  { apply: insertMissingCommas, confidence: 'medium' },
+]
+
 /**
  * Attempt to repair malformed JSON through a staged pipeline.
  *
@@ -18,18 +30,17 @@ function toDiagnostic(error: { message: string; line: number; column: number; ch
  * 1. Try strict parse — if valid, return pretty-formatted output.
  * 2. Run repair stages in order, re-parsing after each.
  * 3. Stop on first successful parse.
- * 4. If all stages fail, return failure with remaining errors.
+ * 4. Skip low-confidence stages (safety threshold).
+ * 5. If all stages fail, return failure with remaining errors.
  *
  * Safety: Never eval input. Never modify string literal contents.
  */
 export function repairJson(input: string): RepairResult {
-  // Capture initial parse errors
   const initialParse = parseJson(input)
   const errorsBefore: FixDiagnostic[] = initialParse.ok
     ? []
     : [toDiagnostic(initialParse.error)]
 
-  // If already valid, just pretty-format
   if (initialParse.ok) {
     const prettyOutput = JSON.stringify(initialParse.data, null, 2)
     const changes: RepairChange[] = prettyOutput !== input.trim()
@@ -45,48 +56,41 @@ export function repairJson(input: string): RepairResult {
     }
   }
 
-  // Run repair stages in order
-  const stages = [
-    normalizeWhitespace,
-    removeTrailingCommas,
-    quoteObjectKeys,
-    insertMissingCommas,
-  ] as const
-
   const allChanges: RepairChange[] = []
   let current = input
 
-  for (const stage of stages) {
-    const result = stage(current)
+  for (const stage of REPAIR_STAGES) {
+    // Halt before applying low-confidence transforms
+    if (stage.confidence === 'low') {
+      continue
+    }
 
+    const result = stage.apply(current)
     if (result.changes.length > 0) {
       allChanges.push(...result.changes)
-      current = result.output
+    }
+    current = result.output
 
-      // Try parsing after this stage
-      const parseAttempt = parseJson(current)
-      if (parseAttempt.ok) {
-        // Success! Pretty-format the result
-        const prettyOutput = JSON.stringify(parseAttempt.data, null, 2)
-        allChanges.push({
-          rule: 'pretty_format',
-          count: 1,
-          confidence: 'high',
-          notes: 'Formatted as pretty JSON',
-        })
+    const parseAttempt = parseJson(current)
+    if (parseAttempt.ok) {
+      const prettyOutput = JSON.stringify(parseAttempt.data, null, 2)
+      allChanges.push({
+        rule: 'pretty_format',
+        count: 1,
+        confidence: 'high',
+        notes: 'Formatted as pretty JSON',
+      })
 
-        return {
-          success: true,
-          output: prettyOutput,
-          changes: allChanges,
-          errorsBefore,
-          errorsAfter: [],
-        }
+      return {
+        success: true,
+        output: prettyOutput,
+        changes: allChanges,
+        errorsBefore,
+        errorsAfter: [],
       }
     }
   }
 
-  // All stages applied but still invalid — try a final parse
   const finalParse = parseJson(current)
   if (finalParse.ok) {
     const prettyOutput = JSON.stringify(finalParse.data, null, 2)
@@ -106,7 +110,6 @@ export function repairJson(input: string): RepairResult {
     }
   }
 
-  // Failed to repair
   return {
     success: false,
     output: null,

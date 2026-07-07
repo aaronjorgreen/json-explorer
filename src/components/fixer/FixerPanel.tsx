@@ -26,6 +26,7 @@ export function FixerPanel({ onOpenInExplorer: _onOpenInExplorer }: FixerPanelPr
 
   const vr = fixer.validationResult
   const errorDiag = vr && !vr.ok ? vr.error : null
+  const hasRepairWarnings = fixer.repairResult?.changes.some((c) => c.confidence === 'medium') ?? false
 
   return (
     <div className="flex h-full flex-col gap-4 lg:flex-row">
@@ -54,6 +55,7 @@ export function FixerPanel({ onOpenInExplorer: _onOpenInExplorer }: FixerPanelPr
             status={fixer.status}
             lineCount={fixer.lineCount}
             charCount={fixer.charCount}
+            hasWarnings={hasRepairWarnings}
           />
           <FixerActionBar
             status={fixer.status}

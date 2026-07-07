@@ -87,15 +87,16 @@ export function removeTrailingCommas(input: string): RuleResult {
 
 /** Rule 3: Quote unquoted object keys. */
 export function quoteObjectKeys(input: string): RuleResult {
-  const stringRanges = getStringRanges(input)
   let count = 0
 
-  // Match unquoted keys: word characters followed by optional whitespace and colon
-  // Only replace when NOT inside a string
   const output = input.replace(
-    /(?<=[\{,]\s*)([a-zA-Z_$][a-zA-Z0-9_$]*)(\s*:)/g,
+    /\b([a-zA-Z_$][a-zA-Z0-9_$]*)(\s*:)/g,
     (match, key: string, colon: string, offset: number) => {
-      if (isInsideString(offset, stringRanges)) {
+      const ranges = getStringRanges(input)
+      if (isInsideString(offset, ranges)) {
+        return match
+      }
+      if (key === 'true' || key === 'false' || key === 'null') {
         return match
       }
       count++
@@ -113,39 +114,35 @@ export function quoteObjectKeys(input: string): RuleResult {
 
 /** Rule 4: Insert missing commas between adjacent properties/values. */
 export function insertMissingCommas(input: string): RuleResult {
-  const stringRanges = getStringRanges(input)
   let count = 0
 
-  // Pattern: value ending (string, number, true, false, null, }, ]) followed by
-  // whitespace/newline then a new value starting (" for strings, { for objects,
-  // [ for arrays, digits, or identifier-like tokens for true/false/null)
-  const output = input.replace(
-    /(["}\]\d]|true|false|null)(\s*\n\s*)(["{\[\da-zA-Z_$])/g,
-    (match, before: string, whitespace: string, after: string, offset: number) => {
-      // Check end of 'before' and start of 'after' aren't inside strings
-      if (isInsideString(offset, stringRanges)) {
+  const patterns: Array<{ regex: RegExp }> = [
+    { regex: /("(?:[^"\\]|\\.)*")(\s*\n\s*)(?=["{[\d])/g },
+    { regex: /(\d+(?:\.\d+)?)(\s*\n\s*)(?=["{[\d])/g },
+    { regex: /\b(true|false|null)\b(\s*\n\s*)(?=["{[\d])/g },
+    { regex: /([}\]])(\s*\n\s*)(?=["{[\d])/g },
+  ]
+
+  let output = input
+
+  for (const { regex } of patterns) {
+    const currentRanges = getStringRanges(output)
+    output = output.replace(regex, (match, before: string, whitespace: string, offset: number) => {
+      if (isInsideString(offset, currentRanges)) {
         return match
       }
 
-      // Don't insert comma between a key and its colon (handled by quoteObjectKeys)
-      const afterOffset = offset + before.length + whitespace.length
-      const restAfter = input.slice(afterOffset)
-      if (/^[a-zA-Z_$][a-zA-Z0-9_$]*\s*:/.test(restAfter)) {
-        // This could be an unquoted key — don't insert comma
-        count++
-        return `${before},${whitespace}${after}`
-      }
-      if (/^"[^"]*"\s*:/.test(restAfter)) {
-        // This is a quoted key starting a new property — insert comma
-        count++
-        return `${before},${whitespace}${after}`
+      if (before.startsWith('"')) {
+        const afterOffset = offset + match.length
+        if (/^\s*:/.test(output.slice(afterOffset))) {
+          return match
+        }
       }
 
-      // For other value starts, insert comma
       count++
-      return `${before},${whitespace}${after}`
-    },
-  )
+      return `${before},${whitespace}`
+    })
+  }
 
   return {
     output,

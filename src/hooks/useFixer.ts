@@ -68,8 +68,11 @@ export function useFixer(): UseFixerResult {
         setValidationResult(vr)
       } else {
         setStatus('failed')
-        const vr = validateJson(rawInput)
-        setValidationResult(vr)
+        if (result.errorsAfter.length > 0) {
+          setValidationResult({ ok: false, error: result.errorsAfter[0] })
+        } else {
+          setValidationResult(validateJson(rawInput))
+        }
       }
     })
   }, [rawInput])
@@ -114,14 +117,15 @@ export function useFixer(): UseFixerResult {
 
       if (result.success && result.output) {
         setStatus('repaired')
-        // Validate the output to confirm it's valid
         const vr = validateJson(result.output)
         setValidationResult(vr)
       } else {
         setStatus('failed')
-        // Re-validate to show remaining errors
-        const vr = validateJson(rawInput)
-        setValidationResult(vr)
+        if (result.errorsAfter.length > 0) {
+          setValidationResult({ ok: false, error: result.errorsAfter[0] })
+        } else {
+          setValidationResult(validateJson(rawInput))
+        }
       }
     })
   }, [rawInput])
