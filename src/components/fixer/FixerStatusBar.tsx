@@ -5,6 +5,7 @@ interface FixerStatusBarProps {
   status: FixerStatus
   lineCount: number
   charCount: number
+  hasWarnings?: boolean
 }
 
 const statusConfig: Record<FixerStatus, { label: string; variant: 'default' | 'accent' | 'muted'; className?: string }> = {
@@ -16,16 +17,21 @@ const statusConfig: Record<FixerStatus, { label: string; variant: 'default' | 'a
   failed: { label: 'Failed', variant: 'accent', className: 'border-red-500/30 bg-red-500/10 text-red-400' },
 }
 
-export function FixerStatusBar({ status, lineCount, charCount }: FixerStatusBarProps) {
+export function FixerStatusBar({ status, lineCount, charCount, hasWarnings }: FixerStatusBarProps) {
   const config = statusConfig[status]
+  const label = status === 'repaired' && hasWarnings ? 'Repaired with warnings' : config.label
 
   return (
     <div className="flex items-center gap-3 text-xs">
       <Badge
         variant={config.variant}
-        className={config.className ?? ''}
+        className={
+          status === 'repaired' && hasWarnings
+            ? 'border-amber-500/30 bg-amber-500/10 text-amber-400'
+            : (config.className ?? '')
+        }
       >
-        {config.label}
+        {label}
       </Badge>
 
       {charCount > 0 && (

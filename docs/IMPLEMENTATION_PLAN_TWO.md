@@ -19,7 +19,7 @@
 |-------|------|--------|
 | A | Sidebar nav + Fixer shell | `[x]` Done |
 | B | Validation + diagnostics | `[x]` Done |
-| C | Repair engine (core rules) | `[ ]` Not started |
+| C | Repair engine (core rules) | `[x]` Done |
 | D | Output, copy + repair summary | `[ ]` Not started |
 | E | Repair history persistence | `[ ]` Not started |
 | F | QA, polish + Explorer regression | `[ ]` Not started |
@@ -213,50 +213,50 @@ src/
 
 #### `lib/fixer/repairRules.ts`
 
-- [ ] `normalizeWhitespace(input)` — trim, normalize `\r\n` → `\n`
-- [ ] `removeTrailingCommas(input)` — remove `,` before `}` and `]`
-- [ ] `quoteObjectKeys(input)` — quote unquoted keys in safe contexts
-- [ ] `insertMissingCommas(input)` — heuristic insert between properties/array primitives
-- [ ] Each rule returns `{ output, changes: RepairChange[] }`
-- [ ] Token-aware implementation: never modify content inside string literals
-- [ ] Unit tests per rule with fixtures in `src/lib/__fixtures__/fixer/`
+- [x] `normalizeWhitespace(input)` — trim, normalize `\r\n` → `\n`
+- [x] `removeTrailingCommas(input)` — remove `,` before `}` and `]`
+- [x] `quoteObjectKeys(input)` — quote unquoted keys in safe contexts
+- [x] `insertMissingCommas(input)` — heuristic insert between properties/array primitives
+- [x] Each rule returns `{ output, changes: RepairChange[] }`
+- [x] Token-aware implementation: never modify content inside string literals
+- [x] Unit tests per rule with fixtures in `src/lib/__fixtures__/fixer/`
 
 #### `lib/fixer/repairJson.ts`
 
-- [ ] Implement `repairJson(input: string): RepairResult`
-- [ ] Pipeline: parse → if valid, pretty-format only → else run stages in order
-- [ ] Re-parse after each stage; stop on first success
-- [ ] Return `{ success, output, changes, errorsBefore, errorsAfter }`
-- [ ] Confidence threshold: halt if only `low` confidence transforms remain
-- [ ] Never `eval` or execute input as JavaScript
+- [x] Implement `repairJson(input: string): RepairResult`
+- [x] Pipeline: parse → if valid, pretty-format only → else run stages in order
+- [x] Re-parse after each stage; stop on first success
+- [x] Return `{ success, output, changes, errorsBefore, errorsAfter }`
+- [x] Confidence threshold: halt if only `low` confidence transforms remain
+- [x] Never `eval` or execute input as JavaScript
 
 #### `lib/fixer/repairSummary.ts`
 
-- [ ] `buildRepairSummary(changes): string[]` — human-readable lines
-- [ ] Example: "Removed 2 trailing commas (high confidence)"
-- [ ] `totalEditCount(changes): number`
+- [x] `buildRepairSummary(changes): string[]` — human-readable lines
+- [x] Example: "Removed 2 trailing commas (high confidence)"
+- [x] `totalEditCount(changes): number`
 
 #### Hook integration
 
-- [ ] Extend `useFixer.ts` — `fixJson()` action, `repairResult`, `undoStack` (single-level undo)
-- [ ] Fix JSON sets status → `repairing` → `repaired` or `failed`
-- [ ] On success: populate output string; on failure: preserve input, show remaining errors
+- [x] Extend `useFixer.ts` — `fixJson()` action, `repairResult`, `undoStack` (single-level undo)
+- [x] Fix JSON sets status → `repairing` → `repaired` or `failed`
+- [x] On success: populate output string; on failure: preserve input, show remaining errors
 
 #### UX polish (Phase C)
 
-- [ ] Fix JSON button shows spinner during repair
-- [ ] `Cmd/Ctrl+Shift+F` keyboard shortcut for Fix JSON
-- [ ] Partial repair: show "Repaired with warnings" if medium-confidence rules applied
-- [ ] Failed repair: error panel updates with post-repair parse error (if any)
+- [x] Fix JSON button shows spinner during repair
+- [x] `Cmd/Ctrl+Shift+F` keyboard shortcut for Fix JSON
+- [x] Partial repair: show "Repaired with warnings" if medium-confidence rules applied
+- [x] Failed repair: error panel updates with post-repair parse error (if any)
 
 ### Exit Criteria
 
-- [ ] Trailing comma payloads repair successfully
-- [ ] Unquoted key payloads repair successfully
-- [ ] Missing comma payloads repair in safe heuristic cases
-- [ ] Already-valid JSON normalizes without corruption
-- [ ] Unrecoverable input fails gracefully with clear message
-- [ ] All `repairJson` / rule unit tests pass
+- [x] Trailing comma payloads repair successfully
+- [x] Unquoted key payloads repair successfully
+- [x] Missing comma payloads repair in safe heuristic cases
+- [x] Already-valid JSON normalizes without corruption
+- [x] Unrecoverable input fails gracefully with clear message
+- [x] All `repairJson` / rule unit tests pass
 
 ---
 

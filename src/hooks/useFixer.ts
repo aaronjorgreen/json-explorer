@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDebouncedValue } from '@/hooks/useDebouncedValue'
 import { validateJson } from '@/lib/fixer/validateJson'
+import { repairJson } from '@/lib/fixer/repairJson'
 import type { FixerStatus, ValidationResult, RepairResult } from '@/types/fixer'
 
 export interface UseFixerResult {
@@ -52,17 +53,46 @@ export function useFixer(): UseFixerResult {
   }, [debouncedInput, runValidation])
 
   // Keyboard shortcut: Cmd/Ctrl+Enter to validate
+  // Note: fixJson is referenced in the effect below but defined later via useCallback;
+  // we store a ref to avoid stale closure issues.
+  const fixJsonRef = useCallback(() => {
+    if (!rawInput.trim()) return
+    setStatus('repairing')
+    setPreviousInput(rawInput)
+    window.requestAnimationFrame(() => {
+      const result = repairJson(rawInput)
+      setRepairResult(result)
+      if (result.success && result.output) {
+        setStatus('repaired')
+        const vr = validateJson(result.output)
+        setValidationResult(vr)
+      } else {
+        setStatus('failed')
+        if (result.errorsAfter.length > 0) {
+          setValidationResult({ ok: false, error: result.errorsAfter[0] })
+        } else {
+          setValidationResult(validateJson(rawInput))
+        }
+      }
+    })
+  }, [rawInput])
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
         event.preventDefault()
         validateNow()
       }
+      // Cmd/Ctrl+Shift+F to fix
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === 'f') {
+        event.preventDefault()
+        fixJsonRef()
+      }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [validateNow])
+  }, [validateNow, fixJsonRef])
 
   const setRawInput = useCallback((value: string) => {
     setRawInputState(value)
@@ -75,9 +105,30 @@ export function useFixer(): UseFixerResult {
   }, [])
 
   const fixJson = useCallback(() => {
-    // Stub for Phase C — will be wired to repairJson
-    void 0
-  }, [])
+    if (!rawInput.trim()) return
+
+    setStatus('repairing')
+    setPreviousInput(rawInput)
+
+    // Use requestAnimationFrame to let the UI show the spinner
+    window.requestAnimationFrame(() => {
+      const result = repairJson(rawInput)
+      setRepairResult(result)
+
+      if (result.success && result.output) {
+        setStatus('repaired')
+        const vr = validateJson(result.output)
+        setValidationResult(vr)
+      } else {
+        setStatus('failed')
+        if (result.errorsAfter.length > 0) {
+          setValidationResult({ ok: false, error: result.errorsAfter[0] })
+        } else {
+          setValidationResult(validateJson(rawInput))
+        }
+      }
+    })
+  }, [rawInput])
 
   const undoFix = useCallback(() => {
     if (previousInput !== null) {
