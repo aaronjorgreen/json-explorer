@@ -21,7 +21,7 @@
 | B | Validation + diagnostics | `[x]` Done |
 | C | Repair engine (core rules) | `[x]` Done |
 | D | Output, copy + repair summary | `[x]` Done |
-| E | Repair history persistence | `[ ]` Not started |
+| E | Repair history persistence | `[x]` Done |
 | F | QA, polish + Explorer regression | `[ ]` Not started |
 
 **Legend:** `[ ]` Not started · `[~]` In progress · `[x]` Done
@@ -315,43 +315,43 @@ src/
 
 #### `lib/fixer/storageFixHistory.ts`
 
-- [ ] `saveFixAttempt(attempt: FixAttempt): void` — key: `structra:fixer-history:v1`
-- [ ] `loadFixHistory(): FixAttempt[]`
-- [ ] `deleteFixAttempt(id: string): void`
-- [ ] `clearFixHistory(): void`
-- [ ] Cap at 20 entries; prune oldest on save
-- [ ] try/catch for quota/private mode — fail silently, app still works
-- [ ] Unit tests with mocked `localStorage`
+- [x] `saveFixAttempt(attempt: FixAttempt): void` — key: `structra:fixer-history:v1`
+- [x] `loadFixHistory(): FixAttempt[]`
+- [x] `deleteFixAttempt(id: string): void`
+- [x] `clearFixHistory(): void`
+- [x] Cap at 20 entries; prune oldest on save
+- [x] try/catch for quota/private mode — fail silently, app still works
+- [x] Unit tests with mocked `localStorage`
 
 #### `hooks/useFixerHistory.ts`
 
-- [ ] Load history on mount
-- [ ] Auto-save on each fix attempt (success or failure)
-- [ ] `reopenAttempt(id)` — populate input, output, summary from record
-- [ ] `deleteAttempt(id)`, `clearAll()`
+- [x] Load history on mount
+- [x] Auto-save on each fix attempt (success or failure)
+- [x] `reopenAttempt(id)` — populate input, output, summary from record
+- [x] `deleteAttempt(id)`, `clearAll()`
 
 #### `FixerHistory.tsx`
 
-- [ ] Sidebar panel or bottom drawer listing recent repairs
-- [ ] Each row: relative timestamp, success/fail icon, preview snippet (first 60 chars)
-- [ ] Click row → reopen; delete icon per row with confirm
-- [ ] "Clear all history" with confirm dialog
-- [ ] Empty state: "No repairs yet"
+- [x] Sidebar panel or bottom drawer listing recent repairs
+- [x] Each row: relative timestamp, success/fail icon, preview snippet (first 60 chars)
+- [x] Click row → reopen; delete icon per row with confirm
+- [x] "Clear all history" with confirm dialog
+- [x] Empty state: "No repairs yet"
 
 #### UX polish (Phase E)
 
-- [ ] History badge on Fixer nav item showing count (optional, max "9+")
-- [ ] Reopened attempt highlights in history list
-- [ ] Failed attempts saved with error summary for debugging
-- [ ] History stored separately from Explorer `structra:last-json`
+- [x] History badge on Fixer nav item showing count (optional, max "9+")
+- [x] Reopened attempt highlights in history list
+- [x] Failed attempts saved with error summary for debugging
+- [x] History stored separately from Explorer `structra:last-json`
 
 ### Exit Criteria
 
-- [ ] Successful repairs appear in history after fix
-- [ ] History survives page refresh
-- [ ] Reopen populates input/output correctly
-- [ ] Delete and clear-all work
-- [ ] Storage unit tests pass
+- [x] Successful repairs appear in history after fix
+- [x] History survives page refresh
+- [x] Reopen populates input/output correctly
+- [x] Delete and clear-all work
+- [x] Storage unit tests pass
 
 ---
 

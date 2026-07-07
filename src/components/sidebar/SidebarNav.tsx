@@ -1,6 +1,7 @@
 import { Braces, Wrench } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 import { SidebarNavItem } from '@/components/sidebar/SidebarNavItem'
+import { useFixerHistoryCount } from '@/hooks/useFixerHistory'
 import type { AppTab } from '@/hooks/useAppTab'
 
 interface SidebarNavProps {
@@ -8,7 +9,18 @@ interface SidebarNavProps {
   onTabChange: (tab: AppTab) => void
 }
 
+function HistoryBadge({ count }: { count: number }) {
+  if (count === 0) return null
+  const label = count > 9 ? '9+' : String(count)
+  return (
+    <span className="rounded-full bg-accent/20 px-1.5 py-0.5 text-[10px] font-medium text-accent-light">
+      {label}
+    </span>
+  )
+}
+
 export function SidebarNav({ activeTab, onTabChange }: SidebarNavProps) {
+  const historyCount = useFixerHistoryCount()
   return (
     <>
       {/* Desktop: persistent left rail */}
@@ -41,6 +53,7 @@ export function SidebarNav({ activeTab, onTabChange }: SidebarNavProps) {
             tabId="fixer"
             activeTab={activeTab}
             onClick={onTabChange}
+            badge={<HistoryBadge count={historyCount} />}
           />
         </div>
       </nav>

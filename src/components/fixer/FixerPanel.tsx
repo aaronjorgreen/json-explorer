@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { FixerEmptyState } from '@/components/fixer/FixerEmptyState'
 import { FixerInput } from '@/components/fixer/FixerInput'
@@ -7,7 +7,9 @@ import { FixerErrorPanel } from '@/components/fixer/FixerErrorPanel'
 import { FixerActionBar } from '@/components/fixer/FixerActionBar'
 import { FixerOutput } from '@/components/fixer/FixerOutput'
 import { FixerSummary } from '@/components/fixer/FixerSummary'
+import { FixerHistory } from '@/components/fixer/FixerHistory'
 import { useFixer } from '@/hooks/useFixer'
+import { useFixerHistory } from '@/hooks/useFixerHistory'
 import { useToast } from '@/hooks/useToast'
 
 interface FixerPanelProps {
@@ -16,17 +18,48 @@ interface FixerPanelProps {
 
 export function FixerPanel({ onOpenInExplorer }: FixerPanelProps) {
   const fixer = useFixer()
+  const history = useFixerHistory()
   const { showToast } = useToast()
   const [outputExpanded, setOutputExpanded] = useState(false)
+  const lastRecordedRepair = useRef<string | null>(null)
 
   const handleLoadSample = (sample: string) => {
     fixer.setRawInput(sample)
+    history.setActiveAttemptId(null)
   }
+
+  const handleReopenAttempt = (id: string) => {
+    const attempt = history.reopenAttempt(id)
+    if (attempt) {
+      fixer.restoreFromAttempt(attempt)
+    }
+  }
+
+  useEffect(() => {
+    if (fixer.status !== 'repaired' && fixer.status !== 'failed') return
+    if (!fixer.repairResult) return
+
+    const signature = `${fixer.rawInput}:${fixer.status}:${fixer.repairResult.output ?? ''}`
+    if (lastRecordedRepair.current === signature) return
+
+    const wasValidInitially = fixer.repairResult.errorsBefore.length === 0
+    history.recordAttempt(fixer.rawInput, fixer.repairResult, wasValidInitially)
+    lastRecordedRepair.current = signature
+  }, [fixer.status, fixer.repairResult, fixer.rawInput, history])
 
   if (!fixer.rawInput.trim() && fixer.status === 'idle') {
     return (
-      <div className="flex h-full flex-col rounded-card border border-border bg-surface">
+      <div className="flex h-full flex-col gap-4 rounded-card border border-border bg-surface p-4">
         <FixerEmptyState onLoadSample={handleLoadSample} />
+        {history.history.length > 0 && (
+          <FixerHistory
+            history={history.history}
+            activeAttemptId={history.activeAttemptId}
+            onReopen={handleReopenAttempt}
+            onDelete={history.deleteAttempt}
+            onClearAll={history.clearAll}
+          />
+        )}
       </div>
     )
   }
@@ -123,6 +156,14 @@ export function FixerPanel({ onOpenInExplorer }: FixerPanelProps) {
             outputCharCount={outputCharCount}
           />
         )}
+
+        <FixerHistory
+          history={history.history}
+          activeAttemptId={history.activeAttemptId}
+          onReopen={handleReopenAttempt}
+          onDelete={history.deleteAttempt}
+          onClearAll={history.clearAll}
+        />
       </div>
 
       {/* Output panel — right on desktop, collapsible on mobile */}
