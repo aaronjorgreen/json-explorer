@@ -20,7 +20,7 @@
 | A | Sidebar nav + Fixer shell | `[x]` Done |
 | B | Validation + diagnostics | `[x]` Done |
 | C | Repair engine (core rules) | `[x]` Done |
-| D | Output, copy + repair summary | `[ ]` Not started |
+| D | Output, copy + repair summary | `[x]` Done |
 | E | Repair history persistence | `[ ]` Not started |
 | F | QA, polish + Explorer regression | `[ ]` Not started |
 
@@ -270,38 +270,38 @@ src/
 
 #### Components
 
-- [ ] `FixerOutput.tsx` — read-only monospace panel, pretty-printed JSON, syntax-friendly wrapping
-- [ ] Copy button — `navigator.clipboard.writeText(output)` + toast
-- [ ] Copy disabled when no successful repair output
-- [ ] `FixerSummary.tsx` — list of applied rules with counts and confidence badges
-- [ ] Summary empty state: "No repairs applied" when input was already valid
+- [x] `FixerOutput.tsx` — read-only monospace panel, pretty-printed JSON, syntax-friendly wrapping
+- [x] Copy button — `navigator.clipboard.writeText(output)` + toast
+- [x] Copy disabled when no successful repair output
+- [x] `FixerSummary.tsx` — list of applied rules with counts and confidence badges
+- [x] Summary empty state: "No repairs applied" when input was already valid
 - [ ] Optional: toggle "Show diff hints" — inline markers for changed regions (stretch goal)
 
 #### Cross-tab flow
 
-- [ ] "Open in Explorer" button — copies fixed JSON to Explorer input and switches tab
-- [ ] Toast: "Opened in Explorer"
-- [ ] Explorer auto-parses the transferred JSON
+- [x] "Open in Explorer" button — copies fixed JSON to Explorer input and switches tab
+- [x] Toast: "Opened in Explorer"
+- [x] Explorer auto-parses the transferred JSON
 
 #### Layout polish
 
-- [ ] Desktop: output panel sticky header with Copy + Open in Explorer
-- [ ] Mobile: output in collapsible section; auto-expand on successful repair
-- [ ] Success state: output panel gets accent border glow
-- [ ] Show before/after stats: char count, line count delta in summary header
+- [x] Desktop: output panel sticky header with Copy + Open in Explorer
+- [x] Mobile: output in collapsible section; auto-expand on successful repair
+- [x] Success state: output panel gets accent border glow
+- [x] Show before/after stats: char count, line count delta in summary header
 
 #### Undo
 
-- [ ] "Undo fix" restores pre-repair input (single-level)
-- [ ] Undo disabled after tab switch or new input edit
+- [x] "Undo fix" restores pre-repair input (single-level)
+- [x] Undo disabled after tab switch or new input edit
 
 ### Exit Criteria
 
-- [ ] Successful repair renders formatted output
-- [ ] Copy produces valid parseable JSON
-- [ ] Repair summary lists each applied rule with count
-- [ ] Open in Explorer works end-to-end
-- [ ] Undo restores previous input
+- [x] Successful repair renders formatted output
+- [x] Copy produces valid parseable JSON
+- [x] Repair summary lists each applied rule with count
+- [x] Open in Explorer works end-to-end
+- [x] Undo restores previous input
 
 ---
 
